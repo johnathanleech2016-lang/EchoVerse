@@ -1,57 +1,70 @@
 const { AppError } = require('../utils/errors');
 
-// Validate movement request
-exports.validateMovement = (req, res, next) => {
-  const { position } = req.body;
+/**
+ * Middleware to validate request body against schema
+ * Usage: validate(schema)
+ */
+const validate = (schema) => {
+  return (req, res, next) => {
+    const { error, value } = schema.validate(req.body, {
+      abortEarly: false,
+      stripUnknown: true,
+    });
 
-  if (!position) {
-    return next(new AppError('Position is required', 400));
-  }
+    if (error) {
+      const messages = error.details.map((detail) => detail.message);
+      return next(new AppError(`Validation error: ${messages.join(', ')}`, 400));
+    }
 
-  if (!position.x || !position.y || !position.z) {
-    return next(new AppError('Position must include x, y, z coordinates', 400));
-  }
-
-  if (typeof position.x !== 'number' || typeof position.y !== 'number' || typeof position.z !== 'number') {
-    return next(new AppError('Coordinates must be numbers', 400));
-  }
-
-  next();
+    req.body = value;
+    next();
+  };
 };
 
-// Validate message request
-exports.validateMessage = (req, res, next) => {
-  const { content } = req.body;
+/**
+ * Middleware to validate request parameters
+ * Usage: validateParams(schema)
+ */
+const validateParams = (schema) => {
+  return (req, res, next) => {
+    const { error, value } = schema.validate(req.params, {
+      abortEarly: false,
+      stripUnknown: true,
+    });
 
-  if (!content) {
-    return next(new AppError('Message content is required', 400));
-  }
+    if (error) {
+      const messages = error.details.map((detail) => detail.message);
+      return next(new AppError(`Parameter validation error: ${messages.join(', ')}`, 400));
+    }
 
-  if (typeof content !== 'string' || content.trim().length === 0) {
-    return next(new AppError('Message must be non-empty text', 400));
-  }
-
-  if (content.length > 1000) {
-    return next(new AppError('Message exceeds 1000 character limit', 400));
-  }
-
-  next();
+    req.params = value;
+    next();
+  };
 };
 
-// Validate interaction request
-exports.validateInteraction = (req, res, next) => {
-  const { action } = req.body;
+/**
+ * Middleware to validate query parameters
+ * Usage: validateQuery(schema)
+ */
+const validateQuery = (schema) => {
+  return (req, res, next) => {
+    const { error, value } = schema.validate(req.query, {
+      abortEarly: false,
+      stripUnknown: true,
+    });
 
-  if (!action) {
-    return next(new AppError('Action is required', 400));
-  }
+    if (error) {
+      const messages = error.details.map((detail) => detail.message);
+      return next(new AppError(`Query validation error: ${messages.join(', ')}`, 400));
+    }
 
-  const validActions = ['pickup', 'use', 'examine', 'talk', 'attack'];
-  if (!validActions.includes(action)) {
-    return next(new AppError(`Action must be one of: ${validActions.join(', ')}`, 400));
-  }
-
-  next();
+    req.query = value;
+    next();
+  };
 };
 
-module.exports = exports;
+module.exports = {
+  validate,
+  validateParams,
+  validateQuery,
+};

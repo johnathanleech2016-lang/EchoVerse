@@ -3,12 +3,16 @@ const cors = require('cors');
 const helmet = require('helmet');
 const dotenv = require('dotenv');
 const path = require('path');
+const connectDB = require('./config/database');
 
 // Load environment variables
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
 const app = express();
 const { errorHandler } = require('./utils/errors');
+
+// Connect to MongoDB
+connectDB();
 
 // Security middleware
 app.use(helmet());
@@ -18,11 +22,8 @@ app.use(cors({
 }));
 
 // Body parser middleware
-app.use(express.json({ limit: '10kb' }));
-app.use(express.urlencoded({ limit: '10kb', extended: true }));
-
-// Static files
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
 // Request logging middleware
 app.use((req, res, next) => {
@@ -33,14 +34,12 @@ app.use((req, res, next) => {
 
 // API Routes
 const authRoutes = require('./routes/auth.routes');
-const worldRoutes = require('./routes/world.routes');
-const playerRoutes = require('./routes/player.routes');
-const adminRoutes = require('./routes/admin.routes');
+const postRoutes = require('./routes/post.routes');
+const userRoutes = require('./routes/user.routes');
 
 app.use('/api/auth', authRoutes);
-app.use('/api/world', worldRoutes);
-app.use('/api/player', playerRoutes);
-app.use('/api/admin', adminRoutes);
+app.use('/api/posts', postRoutes);
+app.use('/api/users', userRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
@@ -49,13 +48,6 @@ app.get('/api/health', (req, res) => {
     message: 'EchoVerse API is running',
     timestamp: new Date().toISOString(),
   });
-});
-
-// Serve index.html for all non-API routes (SPA)
-app.get('*', (req, res) => {
-  if (!req.path.startsWith('/api')) {
-    res.sendFile(path.join(__dirname, '../public/index.html'));
-  }
 });
 
 // 404 handler

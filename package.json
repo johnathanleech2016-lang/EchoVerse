@@ -1,0 +1,23 @@
+{
+  "name": "@johnathanleech2016-lang/echoverse",
+  "version": "1.0.0",
+  "description": "EchoVerse - A Node.js package",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "echo \"Build script not yet defined\"",
+    "prepublishOnly": "npm run build && npm run test"
+  },
+  "keywords": [
+    "echoverse"
+  ],
+  "author": "johnathanleech2016-lang",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnathanleech2016-lang/EchoVerse.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
+}

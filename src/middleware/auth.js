@@ -1,69 +1,58 @@
 const jwt = require('jsonwebtoken');
-const { AppError } = require('../utils/errors');
 
-/**
- * Middleware to verify JWT token
- * Extracts token from Authorization header (Bearer token)
- */
-const authenticateToken = (req, res, next) => {
-  try {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1]; // Extract token from "Bearer token"
+const protect = async (req, res, next) => {
+  let token;
 
-    if (!token) {
-      return next(new AppError('No token provided', 401));
-    }
+  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    token = req.headers.authorization.split(' ')[1];
+  }
 
-    jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key', (err, user) => {
-      if (err) {
-        if (err.name === 'TokenExpiredError') {
-          return next(new AppError('Token expired', 401));
-        }
-        return next(new AppError('Invalid token', 401));
-      }
-      req.user = user;
-      next();
+  if (!token) {
+    return res.status(401).json({
+      success: false,
+      message: 'Not authorized to access this route'
     });
-  } catch (error) {
-    next(new AppError('Authentication failed', 401));
-  }
-};
-
-/**
- * Middleware to verify admin role
- * Must be used after authenticateToken
- */
-const authorizeAdmin = (req, res, next) => {
-  if (!req.user) {
-    return next(new AppError('User not authenticated', 401));
   }
 
-  if (req.user.role !== 'admin') {
-    return next(new AppError('Access denied. Admin role required', 403));
-  }
-
-  next();
-};
-
-/**
- * Middleware to check if user owns the resource
- * Usage: checkOwnership('playerId')
- */
-const checkOwnership = (resourceField) => {
-  return (req, res, next) => {
-    const resourceId = req.params[resourceField];
-    const userId = req.user.id;
-
-    if (resourceId !== userId) {
-      return next(new AppError('Access denied. You do not own this resource', 403));
-    }
-
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = {
+      id: decoded.id,
+      email: decoded.email,
+      username: decoded.username
+    };
     next();
-  };
+  } catch (error) {
+    return res.status(401).json({
+      success: false,
+      message: 'Not authorized to access this route'
+    });
+  }
 };
 
-module.exports = {
-  authenticateToken,
-  authorizeAdmin,
-  checkOwnership,
+const optionalAuth = async (req, res, next) => {
+  let token;
+
+  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    token = req.headers.authorization.split(' ')[1];
+  }
+
+  if (!token) {
+    next();
+    return;
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = {
+      id: decoded.id,
+      email: decoded.email,
+      username: decoded.username
+    };
+    next();
+  } catch (error) {
+    next();
+  }
 };
+
+module.exports = { protect, optionalAuth };

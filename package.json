@@ -1,15 +1,19 @@
 {
   "name": "@johnathanleech2016-lang/echoverse",
   "version": "1.0.0",
-  "description": "EchoVerse - A Node.js package",
-  "main": "src/index.js",
+  "description": "EchoVerse - A Social Media Platform",
+  "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "echo \"Build script not yet defined\"",
-    "prepublishOnly": "npm run build && npm run test"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "jest --detectOpenHandles",
+    "build": "echo \"Build script completed\""
   },
   "keywords": [
-    "echoverse"
+    "echoverse",
+    "social-media",
+    "nodejs",
+    "express"
   ],
   "author": "johnathanleech2016-lang",
   "license": "MIT",
@@ -19,5 +23,19 @@
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.0.0",
+    "dotenv": "^16.3.1",
+    "mongoose": "^7.0.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "express-rate-limit": "^6.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "jest": "^29.5.0"
   }
 }

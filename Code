@@ -1,0 +1,4114 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2870
+\cocoatextscaling1\cocoaplatform1{\fonttbl\f0\fnil\fcharset0 .SFUI-Regular;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 <!DOCTYPE html>
+\f1\fs24 \
+
+\f0\fs34 <html lang="en">
+\f1\fs24 \
+
+\f0\fs34 <head>
+\f1\fs24 \
+
+\f0\fs34 <meta charset="UTF-8" />
+\f1\fs24 \
+
+\f0\fs34 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+\f1\fs24 \
+
+\f0\fs34 <title>EchoVerse \'97 A Real-Time 3D World Platform</title>
+\f1\fs24 \
+
+\f0\fs34 <meta name="description" content="EchoVerse \'97 a real-time, AI-powered multiplayer 3D world you can open and play in your browser." />
+\f1\fs24 \
+
+\f0\fs34 <link rel="preconnect" href="{\field{\*\fldinst{HYPERLINK "https://fonts.googleapis.com"}}{\fldrslt https://fonts.googleapis.com}}" />
+\f1\fs24 \
+
+\f0\fs34 <link rel="preconnect" href="{\field{\*\fldinst{HYPERLINK "https://fonts.gstatic.com"}}{\fldrslt https://fonts.gstatic.com}}" crossorigin />
+\f1\fs24 \
+
+\f0\fs34 <link href="{\field{\*\fldinst{HYPERLINK "https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Sora:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap"}}{\fldrslt https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Sora:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap}}" rel="stylesheet" />
+\f1\fs24 \
+
+\f0\fs34 <style>
+\f1\fs24 \
+
+\f0\fs34   :root \{
+\f1\fs24 \
+
+\f0\fs34     --bg:        #06070f;
+\f1\fs24 \
+
+\f0\fs34     --bg-2:      #090b16;
+\f1\fs24 \
+
+\f0\fs34     --panel:     #0c0f1d;
+\f1\fs24 \
+
+\f0\fs34     --panel-2:   #11152a;
+\f1\fs24 \
+
+\f0\fs34     --line:      rgba(120,140,200,0.14);
+\f1\fs24 \
+
+\f0\fs34     --line-soft: rgba(120,140,200,0.08);
+\f1\fs24 \
+
+\f0\fs34     --ink:       #e7ecfb;
+\f1\fs24 \
+
+\f0\fs34     --ink-dim:   #9aa6c8;
+\f1\fs24 \
+
+\f0\fs34     --ink-mute:  #5d6788;
+\f1\fs24 \
+
+\f0\fs34     --cyan:      #2fe3ff;
+\f1\fs24 \
+
+\f0\fs34     --cyan-deep: #18b8e0;
+\f1\fs24 \
+
+\f0\fs34     --violet:    #8a6bff;
+\f1\fs24 \
+
+\f0\fs34     --pink:      #ff5db1;
+\f1\fs24 \
+
+\f0\fs34     --gold:      #ffc24b;
+\f1\fs24 \
+
+\f0\fs34     --green:     #34e6a8;
+\f1\fs24 \
+
+\f0\fs34     --shadow:    0 24px 60px -24px rgba(0,0,0,0.85);
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   * , *::before, *::after \{ margin:0; padding:0; box-sizing:border-box; \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   html \{ scroll-behavior:smooth; \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   body \{
+\f1\fs24 \
+
+\f0\fs34     font-family:"Sora", system-ui, sans-serif;
+\f1\fs24 \
+
+\f0\fs34     color:var(--ink);
+\f1\fs24 \
+
+\f0\fs34     background:
+\f1\fs24 \
+
+\f0\fs34       radial-gradient(1100px 700px at 78% -8%, rgba(138,107,255,0.16), transparent 60%),
+\f1\fs24 \
+
+\f0\fs34       radial-gradient(1000px 680px at 12% 4%, rgba(47,227,255,0.12), transparent 58%),
+\f1\fs24 \
+
+\f0\fs34       radial-gradient(900px 900px at 50% 120%, rgba(255,93,177,0.07), transparent 60%),
+\f1\fs24 \
+
+\f0\fs34       var(--bg);
+\f1\fs24 \
+
+\f0\fs34     min-height:100vh;
+\f1\fs24 \
+
+\f0\fs34     -webkit-font-smoothing:antialiased;
+\f1\fs24 \
+
+\f0\fs34     overflow-x:hidden;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   /* grain + grid atmosphere */
+\f1\fs24 \
+
+\f0\fs34   body::before \{
+\f1\fs24 \
+
+\f0\fs34     content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+\f1\fs24 \
+
+\f0\fs34     background-image:
+\f1\fs24 \
+
+\f0\fs34       linear-gradient(rgba(120,140,200,0.045) 1px, transparent 1px),
+\f1\fs24 \
+
+\f0\fs34       linear-gradient(90deg, rgba(120,140,200,0.045) 1px, transparent 1px);
+\f1\fs24 \
+
+\f0\fs34     background-size:46px 46px;
+\f1\fs24 \
+
+\f0\fs34     -webkit-mask-image:radial-gradient(120% 90% at 50% 0%, #000 35%, transparent 85%);
+\f1\fs24 \
+
+\f0\fs34             mask-image:radial-gradient(120% 90% at 50% 0%, #000 35%, transparent 85%);
+\f1\fs24 \
+
+\f0\fs34     opacity:.5;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   ::selection \{ background:rgba(47,227,255,.3); color:#fff; \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   a \{ color:inherit; text-decoration:none; \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   .shell \{
+\f1\fs24 \
+
+\f0\fs34     position:relative; z-index:1;
+\f1\fs24 \
+
+\f0\fs34     max-width:1500px; margin:0 auto;
+\f1\fs24 \
+
+\f0\fs34     padding:18px clamp(14px,2.4vw,30px) 34px;
+\f1\fs24 \
+
+\f0\fs34     display:flex; flex-direction:column; gap:16px;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   /* font helpers */
+\f1\fs24 \
+
+\f0\fs34   .display \{ font-family:"Chakra Petch", sans-serif; \}
+\f1\fs24 \
+
+\f0\fs34   .mono    \{ font-family:"Space Mono", monospace; \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   .eyebrow \{
+\f1\fs24 \
+
+\f0\fs34     font-family:"Chakra Petch", sans-serif;
+\f1\fs24 \
+
+\f0\fs34     font-size:.62rem; letter-spacing:.24em; text-transform:uppercase;
+\f1\fs24 \
+
+\f0\fs34     color:var(--ink-mute); font-weight:600;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   /* \uc0\u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  panel base \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
+\f1\fs24 \
+
+\f0\fs34   .panel \{
+\f1\fs24 \
+
+\f0\fs34     position:relative;
+\f1\fs24 \
+
+\f0\fs34     background:
+\f1\fs24 \
+
+\f0\fs34       linear-gradient(160deg, rgba(255,255,255,0.035), rgba(255,255,255,0) 42%),
+\f1\fs24 \
+
+\f0\fs34       var(--panel);
+\f1\fs24 \
+
+\f0\fs34     border:1px solid var(--line);
+\f1\fs24 \
+
+\f0\fs34     border-radius:18px;
+\f1\fs24 \
+
+\f0\fs34     box-shadow:var(--shadow);
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .panel-pad \{ padding:18px; \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   .panel-head \{
+\f1\fs24 \
+
+\f0\fs34     display:flex; align-items:center; justify-content:space-between;
+\f1\fs24 \
+
+\f0\fs34     gap:10px; margin-bottom:14px;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .panel-title \{
+\f1\fs24 \
+
+\f0\fs34     font-family:"Chakra Petch", sans-serif;
+\f1\fs24 \
+
+\f0\fs34     font-size:.74rem; letter-spacing:.18em; text-transform:uppercase;
+\f1\fs24 \
+
+\f0\fs34     color:var(--ink-dim); font-weight:700;
+\f1\fs24 \
+
+\f0\fs34     display:flex; align-items:center; gap:9px;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .panel-title .ic \{ color:var(--cyan); \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   .chip \{
+\f1\fs24 \
+
+\f0\fs34     font-family:"Chakra Petch", sans-serif;
+\f1\fs24 \
+
+\f0\fs34     font-size:.6rem; letter-spacing:.14em; text-transform:uppercase;
+\f1\fs24 \
+
+\f0\fs34     padding:4px 9px; border-radius:999px; font-weight:600;
+\f1\fs24 \
+
+\f0\fs34     border:1px solid var(--line);
+\f1\fs24 \
+
+\f0\fs34     color:var(--ink-dim); background:rgba(255,255,255,0.02);
+\f1\fs24 \
+
+\f0\fs34     display:inline-flex; align-items:center; gap:6px; white-space:nowrap;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .chip.live \{ color:var(--green); border-color:rgba(52,230,168,.3); \}
+\f1\fs24 \
+
+\f0\fs34   .chip .dot \{ width:6px; height:6px; border-radius:50%; background:currentColor;
+\f1\fs24 \
+
+\f0\fs34     box-shadow:0 0 8px currentColor; animation:blink 2.2s ease-in-out infinite; \}
+\f1\fs24 \
+
+\f0\fs34   @keyframes blink \{ 0%,100%\{opacity:1\} 50%\{opacity:.35\} \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   svg.ic \{ width:1em; height:1em; display:inline-block; vertical-align:-0.12em; \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   /* \uc0\u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  header \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
+\f1\fs24 \
+
+\f0\fs34   header.top \{
+\f1\fs24 \
+
+\f0\fs34     display:grid;
+\f1\fs24 \
+
+\f0\fs34     grid-template-columns:auto 1fr auto;
+\f1\fs24 \
+
+\f0\fs34     align-items:center; gap:18px;
+\f1\fs24 \
+
+\f0\fs34     padding:12px 16px;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .brand \{ display:flex; align-items:center; gap:12px; \}
+\f1\fs24 \
+
+\f0\fs34   .brand .mark \{
+\f1\fs24 \
+
+\f0\fs34     width:42px; height:42px; flex:none;
+\f1\fs24 \
+
+\f0\fs34     display:grid; place-items:center;
+\f1\fs24 \
+
+\f0\fs34     border-radius:12px;
+\f1\fs24 \
+
+\f0\fs34     background:linear-gradient(150deg, rgba(47,227,255,.22), rgba(138,107,255,.22));
+\f1\fs24 \
+
+\f0\fs34     border:1px solid rgba(47,227,255,.32);
+\f1\fs24 \
+
+\f0\fs34     box-shadow:inset 0 0 18px rgba(47,227,255,.18);
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .brand .mark svg \{ width:22px; height:22px; color:var(--cyan); \}
+\f1\fs24 \
+
+\f0\fs34   .brand h1 \{
+\f1\fs24 \
+
+\f0\fs34     font-family:"Chakra Petch", sans-serif;
+\f1\fs24 \
+
+\f0\fs34     font-size:1.34rem; font-weight:700; letter-spacing:.02em; line-height:1;
+\f1\fs24 \
+
+\f0\fs34     background:linear-gradient(95deg,#eafcff, #b9c6ff);
+\f1\fs24 \
+
+\f0\fs34     -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .brand p \{ font-size:.7rem; color:var(--ink-mute); margin-top:3px; letter-spacing:.02em; \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   nav.mainnav \{ display:flex; justify-content:center; gap:6px; flex-wrap:wrap; \}
+\f1\fs24 \
+
+\f0\fs34   nav.mainnav button \{
+\f1\fs24 \
+
+\f0\fs34     font-family:"Chakra Petch", sans-serif;
+\f1\fs24 \
+
+\f0\fs34     font-size:.72rem; letter-spacing:.06em; font-weight:500;
+\f1\fs24 \
+
+\f0\fs34     color:var(--ink-dim); background:transparent;
+\f1\fs24 \
+
+\f0\fs34     border:1px solid transparent; border-radius:10px;
+\f1\fs24 \
+
+\f0\fs34     padding:9px 14px; cursor:pointer;
+\f1\fs24 \
+
+\f0\fs34     display:inline-flex; align-items:center; gap:7px;
+\f1\fs24 \
+
+\f0\fs34     transition:.18s;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   nav.mainnav button .ic \{ color:var(--ink-mute); transition:.18s; \}
+\f1\fs24 \
+
+\f0\fs34   nav.mainnav button:hover \{ color:var(--ink); background:rgba(255,255,255,0.04); \}
+\f1\fs24 \
+
+\f0\fs34   nav.mainnav button:hover .ic \{ color:var(--cyan); \}
+\f1\fs24 \
+
+\f0\fs34   nav.mainnav button.active \{
+\f1\fs24 \
+
+\f0\fs34     color:#eafcff; background:rgba(47,227,255,.08);
+\f1\fs24 \
+
+\f0\fs34     border-color:rgba(47,227,255,.25);
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   nav.mainnav button.active .ic \{ color:var(--cyan); \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   .header-right \{ display:flex; align-items:center; gap:10px; \}
+\f1\fs24 \
+
+\f0\fs34   .online-badge \{
+\f1\fs24 \
+
+\f0\fs34     display:flex; align-items:center; gap:9px;
+\f1\fs24 \
+
+\f0\fs34     padding:8px 14px; border-radius:11px;
+\f1\fs24 \
+
+\f0\fs34     border:1px solid rgba(52,230,168,.28);
+\f1\fs24 \
+
+\f0\fs34     background:rgba(52,230,168,.06);
+\f1\fs24 \
+
+\f0\fs34     font-family:"Chakra Petch", sans-serif; font-size:.74rem; letter-spacing:.04em;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .online-badge .pulse \{ position:relative; width:8px; height:8px; \}
+\f1\fs24 \
+
+\f0\fs34   .online-badge .pulse i \{
+\f1\fs24 \
+
+\f0\fs34     position:absolute; inset:0; border-radius:50%; background:var(--green);
+\f1\fs24 \
+
+\f0\fs34     box-shadow:0 0 10px var(--green);
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .online-badge .pulse::after \{
+\f1\fs24 \
+
+\f0\fs34     content:""; position:absolute; inset:-4px; border-radius:50%;
+\f1\fs24 \
+
+\f0\fs34     border:1px solid var(--green); opacity:.6; animation:ring 1.8s ease-out infinite;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   @keyframes ring \{ 0%\{transform:scale(.6);opacity:.7\} 100%\{transform:scale(1.7);opacity:0\} \}
+\f1\fs24 \
+
+\f0\fs34   .online-badge b \{ color:var(--green); font-weight:700; \}
+\f1\fs24 \
+
+\f0\fs34   .online-badge span \{ color:var(--ink-dim); \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   .avatar-btn \{
+\f1\fs24 \
+
+\f0\fs34     width:40px; height:40px; border-radius:11px; flex:none; cursor:pointer;
+\f1\fs24 \
+
+\f0\fs34     border:1px solid var(--line);
+\f1\fs24 \
+
+\f0\fs34     background:linear-gradient(140deg, var(--violet), var(--cyan-deep));
+\f1\fs24 \
+
+\f0\fs34     display:grid; place-items:center;
+\f1\fs24 \
+
+\f0\fs34     font-family:"Chakra Petch", sans-serif; font-weight:700; color:#fff; font-size:.9rem;
+\f1\fs24 \
+
+\f0\fs34     transition:.18s;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .avatar-btn:hover \{ filter:brightness(1.1); transform:translateY(-1px); \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   /* \uc0\u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  hero grid \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
+\f1\fs24 \
+
+\f0\fs34   .hero \{ display:grid; grid-template-columns:262px minmax(0,1fr) 348px; gap:16px; \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   /* feature rail */
+\f1\fs24 \
+
+\f0\fs34   .rail \{ display:flex; flex-direction:column; \}
+\f1\fs24 \
+
+\f0\fs34   .rail .panel-pad \{ display:flex; flex-direction:column; gap:6px; \}
+\f1\fs24 \
+
+\f0\fs34   .feature \{
+\f1\fs24 \
+
+\f0\fs34     display:flex; gap:12px; align-items:flex-start;
+\f1\fs24 \
+
+\f0\fs34     padding:12px; border-radius:12px; cursor:default;
+\f1\fs24 \
+
+\f0\fs34     border:1px solid transparent; transition:.18s;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .feature:hover \{ background:rgba(255,255,255,0.03); border-color:var(--line-soft); transform:translateX(2px); \}
+\f1\fs24 \
+
+\f0\fs34   .feature .fic \{
+\f1\fs24 \
+
+\f0\fs34     width:38px; height:38px; flex:none; border-radius:10px;
+\f1\fs24 \
+
+\f0\fs34     display:grid; place-items:center; font-size:1.05rem;
+\f1\fs24 \
+
+\f0\fs34     border:1px solid var(--line);
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .feature h3 \{ font-size:.86rem; font-weight:600; color:var(--ink); margin-bottom:3px; \}
+\f1\fs24 \
+
+\f0\fs34   .feature p \{ font-size:.74rem; color:var(--ink-mute); line-height:1.5; \}
+\f1\fs24 \
+
+\f0\fs34   .f-cyan   .fic \{ color:var(--cyan);   background:rgba(47,227,255,.09);  border-color:rgba(47,227,255,.22); \}
+\f1\fs24 \
+
+\f0\fs34   .f-violet .fic \{ color:var(--violet); background:rgba(138,107,255,.1);  border-color:rgba(138,107,255,.24); \}
+\f1\fs24 \
+
+\f0\fs34   .f-pink   .fic \{ color:var(--pink);   background:rgba(255,93,177,.09);  border-color:rgba(255,93,177,.22); \}
+\f1\fs24 \
+
+\f0\fs34   .f-gold   .fic \{ color:var(--gold);   background:rgba(255,194,75,.1);   border-color:rgba(255,194,75,.24); \}
+\f1\fs24 \
+
+\f0\fs34   .f-green  .fic \{ color:var(--green);  background:rgba(52,230,168,.09);  border-color:rgba(52,230,168,.22); \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   /* \uc0\u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  world viewport \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
+\f1\fs24 \
+
+\f0\fs34   .stage \{ position:relative; overflow:hidden; padding:0; min-height:430px; display:flex; \}
+\f1\fs24 \
+
+\f0\fs34   #world-canvas \{ position:absolute; inset:0; width:100%; height:100%; display:block; \}
+\f1\fs24 \
+
+\f0\fs34   .stage-grad \{
+\f1\fs24 \
+
+\f0\fs34     position:absolute; inset:0; pointer-events:none;
+\f1\fs24 \
+
+\f0\fs34     background:
+\f1\fs24 \
+
+\f0\fs34       linear-gradient(to bottom, rgba(6,7,15,.55) 0%, transparent 22% 64%, rgba(6,7,15,.78) 100%);
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .stage-inner \{
+\f1\fs24 \
+
+\f0\fs34     position:relative; z-index:2; flex:1;
+\f1\fs24 \
+
+\f0\fs34     display:flex; flex-direction:column; justify-content:space-between;
+\f1\fs24 \
+
+\f0\fs34     padding:16px;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .stage-top \{ display:flex; justify-content:space-between; align-items:flex-start; gap:10px; \}
+\f1\fs24 \
+
+\f0\fs34   .world-tag \{
+\f1\fs24 \
+
+\f0\fs34     display:inline-flex; align-items:center; gap:8px;
+\f1\fs24 \
+
+\f0\fs34     background:rgba(6,7,15,.6); backdrop-filter:blur(8px);
+\f1\fs24 \
+
+\f0\fs34     border:1px solid var(--line); border-radius:10px;
+\f1\fs24 \
+
+\f0\fs34     padding:7px 12px; font-family:"Chakra Petch", sans-serif;
+\f1\fs24 \
+
+\f0\fs34     font-size:.66rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-dim);
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .world-tag b \{ color:var(--cyan); \}
+\f1\fs24 \
+
+\f0\fs34   .you-tag \{
+\f1\fs24 \
+
+\f0\fs34     display:inline-flex; align-items:center; gap:8px;
+\f1\fs24 \
+
+\f0\fs34     background:rgba(6,7,15,.6); backdrop-filter:blur(8px);
+\f1\fs24 \
+
+\f0\fs34     border:1px solid var(--line); border-radius:10px; padding:7px 12px;
+\f1\fs24 \
+
+\f0\fs34     font-size:.72rem; color:var(--ink-dim); cursor:pointer; transition:.16s;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .you-tag:hover \{ border-color:rgba(47,227,255,.4); color:var(--ink); \}
+\f1\fs24 \
+
+\f0\fs34   .you-tag .swatch \{ width:10px; height:10px; border-radius:50%; box-shadow:0 0 8px currentColor; \}
+\f1\fs24 \
+
+\f0\fs34   .you-tag b \{ color:var(--ink); font-weight:600; \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   /* world chat overlay */
+\f1\fs24 \
+
+\f0\fs34   .world-chat \{
+\f1\fs24 \
+
+\f0\fs34     align-self:flex-start; max-width:62%;
+\f1\fs24 \
+
+\f0\fs34     display:flex; flex-direction:column; gap:5px;
+\f1\fs24 \
+
+\f0\fs34     margin-bottom:10px; pointer-events:none;
+\f1\fs24 \
+
+\f0\fs34     -webkit-mask-image:linear-gradient(to top, #000 70%, transparent);
+\f1\fs24 \
+
+\f0\fs34             mask-image:linear-gradient(to top, #000 70%, transparent);
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .wc-line \{
+\f1\fs24 \
+
+\f0\fs34     font-size:.78rem; line-height:1.35;
+\f1\fs24 \
+
+\f0\fs34     text-shadow:0 1px 6px rgba(0,0,0,.9);
+\f1\fs24 \
+
+\f0\fs34     animation:wcIn .35s ease;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   @keyframes wcIn \{ from\{opacity:0; transform:translateY(6px)\} to\{opacity:1; transform:none\} \}
+\f1\fs24 \
+
+\f0\fs34   .wc-line .who \{ font-weight:600; \}
+\f1\fs24 \
+
+\f0\fs34   .wc-line.sys .who \{ color:var(--gold); \}
+\f1\fs24 \
+
+\f0\fs34   .wc-line .msg \{ color:#dfe6fb; \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   /* action dock */
+\f1\fs24 \
+
+\f0\fs34   .dock \{
+\f1\fs24 \
+
+\f0\fs34     display:flex; align-items:center; gap:8px;
+\f1\fs24 \
+
+\f0\fs34     background:rgba(8,10,20,.72); backdrop-filter:blur(12px);
+\f1\fs24 \
+
+\f0\fs34     border:1px solid var(--line); border-radius:14px;
+\f1\fs24 \
+
+\f0\fs34     padding:8px; align-self:center;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .dock button \{
+\f1\fs24 \
+
+\f0\fs34     width:40px; height:40px; border-radius:10px; cursor:pointer;
+\f1\fs24 \
+
+\f0\fs34     border:1px solid transparent; background:rgba(255,255,255,0.03);
+\f1\fs24 \
+
+\f0\fs34     color:var(--ink-dim); display:grid; place-items:center; font-size:1.05rem;
+\f1\fs24 \
+
+\f0\fs34     transition:.15s;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .dock button:hover \{ color:var(--cyan); background:rgba(47,227,255,.1); border-color:rgba(47,227,255,.25); transform:translateY(-2px); \}
+\f1\fs24 \
+
+\f0\fs34   .dock .sep \{ width:1px; height:24px; background:var(--line); margin:0 2px; \}
+\f1\fs24 \
+
+\f0\fs34   .dock .move-hint \{
+\f1\fs24 \
+
+\f0\fs34     font-size:.64rem; color:var(--ink-mute); padding:0 8px;
+\f1\fs24 \
+
+\f0\fs34     font-family:"Chakra Petch",sans-serif; letter-spacing:.06em;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .kbd \{
+\f1\fs24 \
+
+\f0\fs34     display:inline-block; min-width:17px; text-align:center;
+\f1\fs24 \
+
+\f0\fs34     background:rgba(255,255,255,.06); border:1px solid var(--line);
+\f1\fs24 \
+
+\f0\fs34     border-bottom-width:2px; border-radius:5px; padding:1px 4px;
+\f1\fs24 \
+
+\f0\fs34     font-family:"Space Mono",monospace; font-size:.62rem; color:var(--ink-dim);
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   /* mini radar */
+\f1\fs24 \
+
+\f0\fs34   .radar \{
+\f1\fs24 \
+
+\f0\fs34     position:absolute; top:16px; right:16px; z-index:3;
+\f1\fs24 \
+
+\f0\fs34     width:104px; height:104px; border-radius:50%;
+\f1\fs24 \
+
+\f0\fs34     border:1px solid rgba(47,227,255,.28);
+\f1\fs24 \
+
+\f0\fs34     background:radial-gradient(circle at 50% 50%, rgba(47,227,255,.08), rgba(6,7,15,.7));
+\f1\fs24 \
+
+\f0\fs34     overflow:hidden; backdrop-filter:blur(6px);
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .{\field{\*\fldinst{HYPERLINK "radar::before"}}{\fldrslt radar::before}}, .{\field{\*\fldinst{HYPERLINK "radar::after"}}{\fldrslt radar::after}} \{
+\f1\fs24 \
+
+\f0\fs34     content:""; position:absolute; background:rgba(47,227,255,.16);
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .{\field{\*\fldinst{HYPERLINK "radar::before"}}{\fldrslt radar::before}} \{ left:50%; top:0; bottom:0; width:1px; \}
+\f1\fs24 \
+
+\f0\fs34   .{\field{\*\fldinst{HYPERLINK "radar::after"}}{\fldrslt radar::after}}  \{ top:50%; left:0; right:0; height:1px; \}
+\f1\fs24 \
+
+\f0\fs34   .radar .sweep \{
+\f1\fs24 \
+
+\f0\fs34     position:absolute; inset:0; border-radius:50%;
+\f1\fs24 \
+
+\f0\fs34     background:conic-gradient(from 0deg, rgba(47,227,255,.32), transparent 60deg);
+\f1\fs24 \
+
+\f0\fs34     animation:spin 3.4s linear infinite;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   @keyframes spin \{ to \{ transform:rotate(360deg); \} \}
+\f1\fs24 \
+
+\f0\fs34   .radar .blip \{ position:absolute; width:6px; height:6px; border-radius:50%;
+\f1\fs24 \
+
+\f0\fs34     transform:translate(-50%,-50%); box-shadow:0 0 7px currentColor; \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   /* \uc0\u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  AURORA NPC panel \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
+\f1\fs24 \
+
+\f0\fs34   .npc \{ display:flex; flex-direction:column; \}
+\f1\fs24 \
+
+\f0\fs34   .npc .panel-pad \{ display:flex; flex-direction:column; gap:0; height:100%; \}
+\f1\fs24 \
+
+\f0\fs34   .face-wrap \{
+\f1\fs24 \
+
+\f0\fs34     position:relative; height:148px; border-radius:14px; overflow:hidden;
+\f1\fs24 \
+
+\f0\fs34     border:1px solid rgba(47,227,255,.18);
+\f1\fs24 \
+
+\f0\fs34     background:
+\f1\fs24 \
+
+\f0\fs34       radial-gradient(120% 90% at 50% 12%, rgba(47,227,255,.16), transparent 62%),
+\f1\fs24 \
+
+\f0\fs34       linear-gradient(180deg, #081320, #060a14);
+\f1\fs24 \
+
+\f0\fs34     margin-bottom:14px; display:grid; place-items:center;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .face-wrap svg \{ width:120px; height:120px; \}
+\f1\fs24 \
+
+\f0\fs34   .face-wrap .scan \{
+\f1\fs24 \
+
+\f0\fs34     position:absolute; left:0; right:0; height:34px;
+\f1\fs24 \
+
+\f0\fs34     background:linear-gradient(to bottom, transparent, rgba(47,227,255,.14), transparent);
+\f1\fs24 \
+
+\f0\fs34     animation:scan 3.6s ease-in-out infinite;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   @keyframes scan \{ 0%,100%\{ transform:translateY(-30px) \} 50%\{ transform:translateY(140px) \} \}
+\f1\fs24 \
+
+\f0\fs34   .npc-name \{ display:flex; align-items:baseline; gap:9px; margin-bottom:8px; \}
+\f1\fs24 \
+
+\f0\fs34   .npc-name h2 \{
+\f1\fs24 \
+
+\f0\fs34     font-family:"Chakra Petch",sans-serif; font-size:1.18rem; letter-spacing:.05em;
+\f1\fs24 \
+
+\f0\fs34     color:#eafcff; font-weight:700;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .npc-name small \{ font-size:.66rem; color:var(--ink-mute); letter-spacing:.08em; text-transform:uppercase; \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   .npc-feed \{
+\f1\fs24 \
+
+\f0\fs34     flex:1; min-height:96px; max-height:200px; overflow-y:auto;
+\f1\fs24 \
+
+\f0\fs34     display:flex; flex-direction:column; gap:9px; padding-right:4px; margin-bottom:12px;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .npc-{\field{\*\fldinst{HYPERLINK "feed::-webkit-scrollbar"}}{\fldrslt feed::-webkit-scrollbar}} \{ width:5px; \}
+\f1\fs24 \
+
+\f0\fs34   .npc-{\field{\*\fldinst{HYPERLINK "feed::-webkit-scrollbar-thumb"}}{\fldrslt feed::-webkit-scrollbar-thumb}} \{ background:rgba(120,140,200,.22); border-radius:99px; \}
+\f1\fs24 \
+
+\f0\fs34   .bubble \{
+\f1\fs24 \
+
+\f0\fs34     font-size:.82rem; line-height:1.5; padding:10px 13px; border-radius:13px;
+\f1\fs24 \
+
+\f0\fs34     max-width:92%; animation:wcIn .3s ease;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .{\field{\*\fldinst{HYPERLINK "http://bubble.ai"}}{\fldrslt bubble.ai}} \{
+\f1\fs24 \
+
+\f0\fs34     align-self:flex-start; color:#e3f6ff;
+\f1\fs24 \
+
+\f0\fs34     background:rgba(47,227,255,.08); border:1px solid rgba(47,227,255,.2);
+\f1\fs24 \
+
+\f0\fs34     border-bottom-left-radius:4px;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .{\field{\*\fldinst{HYPERLINK "http://bubble.me"}}{\fldrslt bubble.me}} \{
+\f1\fs24 \
+
+\f0\fs34     align-self:flex-end; color:#efeaff;
+\f1\fs24 \
+
+\f0\fs34     background:rgba(138,107,255,.13); border:1px solid rgba(138,107,255,.28);
+\f1\fs24 \
+
+\f0\fs34     border-bottom-right-radius:4px;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .bubble.typing \{ color:var(--cyan); font-style:italic; opacity:.85; \}
+\f1\fs24 \
+
+\f0\fs34   .bubble.typing i \{ display:inline-block; width:5px; height:5px; border-radius:50%;
+\f1\fs24 \
+
+\f0\fs34     background:var(--cyan); margin-left:2px; animation:blink 1s infinite; \}
+\f1\fs24 \
+
+\f0\fs34   .bubble.typing i:nth-child(2)\{ animation-delay:.2s \} .bubble.typing i:nth-child(3)\{ animation-delay:.4s \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   .quick \{ display:flex; flex-wrap:wrap; gap:7px; margin-bottom:11px; \}
+\f1\fs24 \
+
+\f0\fs34   .quick button \{
+\f1\fs24 \
+
+\f0\fs34     font-size:.72rem; color:var(--ink-dim); cursor:pointer;
+\f1\fs24 \
+
+\f0\fs34     background:rgba(255,255,255,0.03); border:1px solid var(--line);
+\f1\fs24 \
+
+\f0\fs34     border-radius:999px; padding:7px 12px; transition:.16s;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .quick button:hover \{ color:#eafcff; border-color:rgba(47,227,255,.4); background:rgba(47,227,255,.08); \}
+\f1\fs24 \
+
+\f0\fs34   .quick button:disabled \{ opacity:.4; cursor:not-allowed; \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   .npc-input \{ display:flex; gap:8px; \}
+\f1\fs24 \
+
+\f0\fs34   .field \{
+\f1\fs24 \
+
+\f0\fs34     flex:1; background:rgba(255,255,255,0.03); border:1px solid var(--line);
+\f1\fs24 \
+
+\f0\fs34     border-radius:11px; color:var(--ink); padding:11px 13px; font-size:.84rem;
+\f1\fs24 \
+
+\f0\fs34     font-family:"Sora",sans-serif; outline:none; transition:.16s; min-width:0;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .field::placeholder \{ color:var(--ink-mute); \}
+\f1\fs24 \
+
+\f0\fs34   .field:focus \{ border-color:rgba(47,227,255,.45); background:rgba(47,227,255,.05); \}
+\f1\fs24 \
+
+\f0\fs34   .send-btn \{
+\f1\fs24 \
+
+\f0\fs34     flex:none; width:44px; border-radius:11px; cursor:pointer; border:none;
+\f1\fs24 \
+
+\f0\fs34     background:linear-gradient(140deg, var(--cyan), var(--cyan-deep));
+\f1\fs24 \
+
+\f0\fs34     color:#021018; display:grid; place-items:center; font-size:1.05rem;
+\f1\fs24 \
+
+\f0\fs34     transition:.16s;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .send-btn:hover \{ filter:brightness(1.08); \}
+\f1\fs24 \
+
+\f0\fs34   .send-btn:disabled \{ opacity:.45; cursor:not-allowed; \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   /* \uc0\u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  bottom 4-card row \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
+\f1\fs24 \
+
+\f0\fs34   .grid4 \{ display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:16px; \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   /* chat & social */
+\f1\fs24 \
+
+\f0\fs34   .social-body \{ display:grid; grid-template-columns:84px 1fr; gap:12px; \}
+\f1\fs24 \
+
+\f0\fs34   .channels \{ display:flex; flex-direction:column; gap:3px; \}
+\f1\fs24 \
+
+\f0\fs34   .channels .ch \{
+\f1\fs24 \
+
+\f0\fs34     font-family:"Space Mono",monospace; font-size:.74rem; color:var(--ink-mute);
+\f1\fs24 \
+
+\f0\fs34     padding:5px 8px; border-radius:7px; cursor:pointer; transition:.14s;
+\f1\fs24 \
+
+\f0\fs34     white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .channels .ch:hover \{ color:var(--ink-dim); background:rgba(255,255,255,0.03); \}
+\f1\fs24 \
+
+\f0\fs34   .channels .ch.on \{ color:#eafcff; background:rgba(47,227,255,.1); \}
+\f1\fs24 \
+
+\f0\fs34   .channels .ch .h \{ color:var(--cyan); opacity:.7; \}
+\f1\fs24 \
+
+\f0\fs34   .chat-stream \{
+\f1\fs24 \
+
+\f0\fs34     display:flex; flex-direction:column; gap:9px;
+\f1\fs24 \
+
+\f0\fs34     height:158px; overflow-y:auto; padding-right:4px;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .chat-stream::-webkit-scrollbar \{ width:5px; \}
+\f1\fs24 \
+
+\f0\fs34   .chat-stream::-webkit-scrollbar-thumb \{ background:rgba(120,140,200,.2); border-radius:99px; \}
+\f1\fs24 \
+
+\f0\fs34   .cmsg \{ display:flex; gap:9px; align-items:flex-start; animation:wcIn .3s ease; \}
+\f1\fs24 \
+
+\f0\fs34   .cmsg .pfp \{
+\f1\fs24 \
+
+\f0\fs34     width:26px; height:26px; flex:none; border-radius:8px; font-size:.66rem;
+\f1\fs24 \
+
+\f0\fs34     display:grid; place-items:center; color:#06070f; font-weight:700;
+\f1\fs24 \
+
+\f0\fs34     font-family:"Chakra Petch",sans-serif;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .cmsg .body \{ min-width:0; \}
+\f1\fs24 \
+
+\f0\fs34   .cmsg .body .nm \{ font-size:.74rem; font-weight:600; \}
+\f1\fs24 \
+
+\f0\fs34   .cmsg .body .tx \{ font-size:.78rem; color:var(--ink-dim); line-height:1.4; \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   /* watch together */
+\f1\fs24 \
+
+\f0\fs34   .player-box \{
+\f1\fs24 \
+
+\f0\fs34     position:relative; border-radius:12px; overflow:hidden; aspect-ratio:16/9;
+\f1\fs24 \
+
+\f0\fs34     border:1px solid var(--line); margin-bottom:11px;
+\f1\fs24 \
+
+\f0\fs34     background:
+\f1\fs24 \
+
+\f0\fs34       radial-gradient(80% 120% at 30% 0%, rgba(138,107,255,.4), transparent 60%),
+\f1\fs24 \
+
+\f0\fs34       radial-gradient(90% 120% at 90% 100%, rgba(255,93,177,.34), transparent 55%),
+\f1\fs24 \
+
+\f0\fs34       linear-gradient(160deg,#1a1430,#0a0a18);
+\f1\fs24 \
+
+\f0\fs34     display:grid; place-items:center;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .player-box .dragon \{ width:46%; opacity:.9; filter:drop-shadow(0 6px 22px rgba(255,93,177,.5)); \}
+\f1\fs24 \
+
+\f0\fs34   .play-circle \{
+\f1\fs24 \
+
+\f0\fs34     position:absolute; width:48px; height:48px; border-radius:50%; cursor:pointer;
+\f1\fs24 \
+
+\f0\fs34     background:rgba(8,10,20,.6); backdrop-filter:blur(6px);
+\f1\fs24 \
+
+\f0\fs34     border:1px solid rgba(255,255,255,.5); display:grid; place-items:center;
+\f1\fs24 \
+
+\f0\fs34     color:#fff; font-size:1.1rem; transition:.16s;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .play-circle:hover \{ transform:scale(1.08); background:rgba(47,227,255,.3); \}
+\f1\fs24 \
+
+\f0\fs34   .scrub \{ position:absolute; left:9px; right:9px; bottom:9px; \}
+\f1\fs24 \
+
+\f0\fs34   .scrub .bar \{ height:4px; border-radius:99px; background:rgba(255,255,255,.18); overflow:hidden; \}
+\f1\fs24 \
+
+\f0\fs34   .scrub .bar i \{ display:block; height:100%; width:38%; background:var(--pink); border-radius:99px; \}
+\f1\fs24 \
+
+\f0\fs34   .scrub .meta \{ display:flex; justify-content:space-between; font-family:"Space Mono",monospace;
+\f1\fs24 \
+
+\f0\fs34     font-size:.6rem; color:#cfd6ec; margin-top:5px; \}
+\f1\fs24 \
+
+\f0\fs34   .watch-now \{ font-size:.78rem; color:var(--ink-dim); margin-bottom:9px; \}
+\f1\fs24 \
+
+\f0\fs34   .watch-now b \{ color:var(--ink); \}
+\f1\fs24 \
+
+\f0\fs34   .viewers \{ display:flex; align-items:center; gap:0; \}
+\f1\fs24 \
+
+\f0\fs34   .viewers .pfp \{
+\f1\fs24 \
+
+\f0\fs34     width:24px; height:24px; border-radius:50%; margin-left:-7px;
+\f1\fs24 \
+
+\f0\fs34     border:2px solid var(--panel); display:grid; place-items:center;
+\f1\fs24 \
+
+\f0\fs34     font-size:.6rem; font-weight:700; color:#06070f; font-family:"Chakra Petch",sans-serif;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .viewers .more \{ font-size:.7rem; color:var(--ink-mute); margin-left:9px; \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   /* mini games */
+\f1\fs24 \
+
+\f0\fs34   .game-box \{
+\f1\fs24 \
+
+\f0\fs34     position:relative; border-radius:12px; overflow:hidden; aspect-ratio:16/10;
+\f1\fs24 \
+
+\f0\fs34     margin-bottom:11px; border:1px solid var(--line);
+\f1\fs24 \
+
+\f0\fs34     background:linear-gradient(165deg,#241a05,#0c0a14);
+\f1\fs24 \
+
+\f0\fs34     display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .game-box .glow \{ position:absolute; inset:0;
+\f1\fs24 \
+
+\f0\fs34     background:radial-gradient(60% 60% at 50% 70%, rgba(255,194,75,.3), transparent 70%); \}
+\f1\fs24 \
+
+\f0\fs34   .game-box .title \{
+\f1\fs24 \
+
+\f0\fs34     position:relative; font-family:"Chakra Petch",sans-serif; font-weight:700;
+\f1\fs24 \
+
+\f0\fs34     font-size:1.5rem; letter-spacing:.02em; color:var(--gold);
+\f1\fs24 \
+
+\f0\fs34     text-shadow:0 0 18px rgba(255,194,75,.6);
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .game-box .score \{
+\f1\fs24 \
+
+\f0\fs34     position:relative; font-family:"Space Mono",monospace; font-size:.86rem;
+\f1\fs24 \
+
+\f0\fs34     color:#fff5dc; letter-spacing:.05em;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .game-box .coin \{
+\f1\fs24 \
+
+\f0\fs34     position:absolute; width:18px; height:18px; border-radius:50%;
+\f1\fs24 \
+
+\f0\fs34     background:radial-gradient(circle at 38% 35%, #fff2c4, var(--gold) 60%, #b87900);
+\f1\fs24 \
+
+\f0\fs34     box-shadow:0 0 12px rgba(255,194,75,.7);
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .lboard \{ display:flex; flex-direction:column; gap:6px; margin-bottom:12px; \}
+\f1\fs24 \
+
+\f0\fs34   .lrow \{ display:flex; align-items:center; gap:9px; font-size:.76rem; \}
+\f1\fs24 \
+
+\f0\fs34   .lrow .rk \{ font-family:"Space Mono",monospace; color:var(--ink-mute); width:18px; \}
+\f1\fs24 \
+
+\f0\fs34   .lrow .rk.gold \{ color:var(--gold); \} .lrow .rk.silv \{ color:#cdd5e8; \} .lrow .rk.bron \{ color:#e0945a; \}
+\f1\fs24 \
+
+\f0\fs34   .lrow .nm \{ flex:1; color:var(--ink-dim); \}
+\f1\fs24 \
+
+\f0\fs34   .lrow .pts \{ font-family:"Space Mono",monospace; color:var(--ink); \}
+\f1\fs24 \
+
+\f0\fs34   .play-btn \{
+\f1\fs24 \
+
+\f0\fs34     width:100%; border:none; cursor:pointer; border-radius:11px; padding:11px;
+\f1\fs24 \
+
+\f0\fs34     font-family:"Chakra Petch",sans-serif; font-weight:700; letter-spacing:.1em; font-size:.8rem;
+\f1\fs24 \
+
+\f0\fs34     color:#1a1206; background:linear-gradient(135deg,#ffd166,#ffae34);
+\f1\fs24 \
+
+\f0\fs34     text-transform:uppercase; transition:.16s;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .play-btn:hover \{ filter:brightness(1.06); transform:translateY(-1px); box-shadow:0 10px 26px -10px rgba(255,174,52,.7); \}
+\f1\fs24 \
+
+\f0\fs34   .play-btn:active \{ transform:translateY(0); \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   /* crypto wallet */
+\f1\fs24 \
+
+\f0\fs34   .balance \{ display:flex; align-items:flex-end; gap:10px; margin-bottom:4px; \}
+\f1\fs24 \
+
+\f0\fs34   .balance .amt \{ font-family:"Chakra Petch",sans-serif; font-size:1.9rem; font-weight:700;
+\f1\fs24 \
+
+\f0\fs34     color:#eafcff; line-height:1; letter-spacing:.01em; \}
+\f1\fs24 \
+
+\f0\fs34   .balance .cur \{ font-family:"Chakra Petch",sans-serif; font-size:.84rem; color:var(--cyan); padding-bottom:3px; \}
+\f1\fs24 \
+
+\f0\fs34   .delta \{ font-size:.74rem; color:var(--green); margin-bottom:14px; font-family:"Space Mono",monospace; \}
+\f1\fs24 \
+
+\f0\fs34   .delta .down \{ color:var(--pink); \}
+\f1\fs24 \
+
+\f0\fs34   .wallet-actions \{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:14px; \}
+\f1\fs24 \
+
+\f0\fs34   .wallet-actions button \{
+\f1\fs24 \
+
+\f0\fs34     border:1px solid var(--line); background:rgba(255,255,255,0.03); cursor:pointer;
+\f1\fs24 \
+
+\f0\fs34     border-radius:10px; padding:9px 4px; color:var(--ink-dim); font-size:.7rem;
+\f1\fs24 \
+
+\f0\fs34     display:flex; flex-direction:column; align-items:center; gap:5px; transition:.16s;
+\f1\fs24 \
+
+\f0\fs34     font-family:"Chakra Petch",sans-serif; letter-spacing:.04em;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .wallet-actions button .ic \{ font-size:1.05rem; color:var(--cyan); \}
+\f1\fs24 \
+
+\f0\fs34   .wallet-actions button:hover \{ border-color:rgba(47,227,255,.35); color:var(--ink); background:rgba(47,227,255,.06); \}
+\f1\fs24 \
+
+\f0\fs34   .tx \{ display:flex; flex-direction:column; gap:9px; \}
+\f1\fs24 \
+
+\f0\fs34   .txrow \{ display:flex; align-items:center; gap:10px; \}
+\f1\fs24 \
+
+\f0\fs34   .txrow .ti \{
+\f1\fs24 \
+
+\f0\fs34     width:30px; height:30px; flex:none; border-radius:9px; display:grid; place-items:center; font-size:.9rem;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .txrow .{\field{\*\fldinst{HYPERLINK "http://ti.in"}}{\fldrslt ti.in}}  \{ color:var(--green); background:rgba(52,230,168,.1); \}
+\f1\fs24 \
+
+\f0\fs34   .txrow .ti.out \{ color:var(--pink);  background:rgba(255,93,177,.1); \}
+\f1\fs24 \
+
+\f0\fs34   .txrow .td \{ flex:1; min-width:0; \}
+\f1\fs24 \
+
+\f0\fs34   .txrow .td .t1 \{ font-size:.76rem; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; \}
+\f1\fs24 \
+
+\f0\fs34   .txrow .td .t2 \{ font-size:.66rem; color:var(--ink-mute); \}
+\f1\fs24 \
+
+\f0\fs34   .txrow .tv \{ font-family:"Space Mono",monospace; font-size:.76rem; \}
+\f1\fs24 \
+
+\f0\fs34   .txrow .{\field{\*\fldinst{HYPERLINK "http://tv.in"}}{\fldrslt tv.in}} \{ color:var(--green); \} .txrow .tv.out \{ color:var(--pink); \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   .panel-foot \{
+\f1\fs24 \
+
+\f0\fs34     margin-top:13px; padding-top:11px; border-top:1px solid var(--line-soft);
+\f1\fs24 \
+
+\f0\fs34     text-align:center;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .panel-foot button, .link-row \{
+\f1\fs24 \
+
+\f0\fs34     background:none; border:none; cursor:pointer;
+\f1\fs24 \
+
+\f0\fs34     font-family:"Chakra Petch",sans-serif; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase;
+\f1\fs24 \
+
+\f0\fs34     color:var(--ink-mute); transition:.15s;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .panel-foot button:hover \{ color:var(--cyan); \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   /* \uc0\u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  feature strip \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
+\f1\fs24 \
+
+\f0\fs34   .strip \{ display:grid; grid-template-columns:repeat(5,1fr); gap:14px; padding:18px; \}
+\f1\fs24 \
+
+\f0\fs34   .strip .cell \{ display:flex; gap:12px; align-items:center; \}
+\f1\fs24 \
+
+\f0\fs34   .strip .cell + .cell \{ border-left:1px solid var(--line-soft); padding-left:14px; \}
+\f1\fs24 \
+
+\f0\fs34   .strip .si \{
+\f1\fs24 \
+
+\f0\fs34     width:40px; height:40px; flex:none; border-radius:11px; display:grid; place-items:center;
+\f1\fs24 \
+
+\f0\fs34     border:1px solid var(--line); font-size:1.1rem;
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   .strip h4 \{ font-family:"Chakra Petch",sans-serif; font-size:.74rem; letter-spacing:.08em; color:var(--ink); text-transform:uppercase; \}
+\f1\fs24 \
+
+\f0\fs34   .strip p \{ font-size:.68rem; color:var(--ink-mute); line-height:1.4; margin-top:2px; \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   .footnote \{ text-align:center; color:var(--ink-mute); font-size:.7rem; padding:4px 0 0; letter-spacing:.04em; \}
+\f1\fs24 \
+
+\f0\fs34   .footnote b \{ color:var(--ink-dim); \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   /* toast */
+\f1\fs24 \
+
+\f0\fs34   #toast \{
+\f1\fs24 \
+
+\f0\fs34     position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px);
+\f1\fs24 \
+
+\f0\fs34     background:rgba(12,15,29,.96); border:1px solid var(--line); border-radius:12px;
+\f1\fs24 \
+
+\f0\fs34     padding:12px 18px; font-size:.82rem; color:var(--ink); z-index:120;
+\f1\fs24 \
+
+\f0\fs34     box-shadow:var(--shadow); opacity:0; pointer-events:none; transition:.28s;
+\f1\fs24 \
+
+\f0\fs34     display:flex; align-items:center; gap:10px; backdrop-filter:blur(10px);
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   #toast.show \{ opacity:1; transform:translateX(-50%) translateY(0); \}
+\f1\fs24 \
+
+\f0\fs34   #toast .ic \{ color:var(--cyan); \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   /* responsive */
+\f1\fs24 \
+
+\f0\fs34   @media (max-width:1140px) \{
+\f1\fs24 \
+
+\f0\fs34     .hero \{ grid-template-columns:1fr; \}
+\f1\fs24 \
+
+\f0\fs34     .rail \{ order:2; \}
+\f1\fs24 \
+
+\f0\fs34     .stage \{ order:1; min-height:380px; \}
+\f1\fs24 \
+
+\f0\fs34     .npc \{ order:3; \}
+\f1\fs24 \
+
+\f0\fs34     .rail .panel-pad \{ flex-direction:row; flex-wrap:wrap; \}
+\f1\fs24 \
+
+\f0\fs34     .feature \{ flex:1 1 280px; \}
+\f1\fs24 \
+
+\f0\fs34     .grid4 \{ grid-template-columns:repeat(2,1fr); \}
+\f1\fs24 \
+
+\f0\fs34     .strip \{ grid-template-columns:repeat(2,1fr); \}
+\f1\fs24 \
+
+\f0\fs34     .strip .cell + .cell \{ border-left:none; padding-left:0; \}
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   @media (max-width:720px) \{
+\f1\fs24 \
+
+\f0\fs34     header.top \{ grid-template-columns:1fr auto; \}
+\f1\fs24 \
+
+\f0\fs34     nav.mainnav \{ display:none; \}
+\f1\fs24 \
+
+\f0\fs34     .grid4 \{ grid-template-columns:1fr; \}
+\f1\fs24 \
+
+\f0\fs34     .strip \{ grid-template-columns:1fr; \}
+\f1\fs24 \
+
+\f0\fs34     .brand p \{ display:none; \}
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34 </style>
+\f1\fs24 \
+
+\f0\fs34 </head>
+\f1\fs24 \
+
+\f0\fs34 <body>
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 <!-- icon defs -->
+\f1\fs24 \
+
+\f0\fs34 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+\f1\fs24 \
+
+\f0\fs34   <defs>
+\f1\fs24 \
+
+\f0\fs34     <symbol id="i-hex" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M12 2.5 20 7v10l-8 4.5L4 17V7z"/><path fill="none" stroke="currentColor" stroke-width="1.4" d="M12 7.5 16 10v4l-4 2.5L8 14v-4z"/></symbol>
+\f1\fs24 \
+
+\f0\fs34     <symbol id="i-map" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="m9 4-6 2.5v14L9 18l6 2.5 6-2.5v-14L15 6 9 4Zm0 0v14m6-12v14"/></symbol>
+\f1\fs24 \
+
+\f0\fs34     <symbol id="i-bag" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M4 8h16l-1 12H5L4 8Zm4 0V6a4 4 0 0 1 8 0v2"/></symbol>
+\f1\fs24 \
+
+\f0\fs34     <symbol id="i-quest" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M6 3h9l4 4v14H6zM9 8h4m-4 4h7m-7 4h7"/></symbol>
+\f1\fs24 \
+
+\f0\fs34     <symbol id="i-friends" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm-6 9a6 6 0 0 1 12 0M16 4.5a3.5 3.5 0 0 1 0 6.8M21 20a6 6 0 0 0-4-5.6"/></symbol>
+\f1\fs24 \
+
+\f0\fs34     <symbol id="i-gear" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M19.4 13a7.9 7.9 0 0 0 0-2l1.8-1.4-2-3.4-2.1.8a7.6 7.6 0 0 0-1.7-1l-.3-2.3H9l-.3 2.3a7.6 7.6 0 0 0-1.7 1l-2.1-.8-2 3.4L4.6 11a7.9 7.9 0 0 0 0 2l-1.8 1.4 2 3.4 2.1-.8c.5.4 1.1.7 1.7 1l.3 2.3h4.2l.3-2.3c.6-.3 1.2-.6 1.7-1l2.1.8 2-3.4z"/></symbol>
+\f1\fs24 \
+
+\f0\fs34     <symbol id="i-users" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-7 8a7 7 0 0 1 14 0"/></symbol>
+\f1\fs24 \
+
+\f0\fs34     <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="9.5" y="9.5" width="5" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/><path stroke="currentColor" stroke-width="1.4" stroke-linecap="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M3 9h2m-2 6h2m14-6h2m-2 6h2"/></symbol>
+\f1\fs24 \
+
+\f0\fs34     <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></symbol>
+\f1\fs24 \
+
+\f0\fs34     <symbol id="i-tv" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M8 21h8"/></symbol>
+\f1\fs24 \
+
+\f0\fs34     <symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M12 8v8m-2-6h3a1.5 1.5 0 0 1 0 3h-2a1.5 1.5 0 0 0 0 3h3"/></symbol>
+\f1\fs24 \
+
+\f0\fs34     <symbol id="i-wallet" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M4 7a2 2 0 0 1 2-2h11v4M4 7v10a2 2 0 0 0 2 2h13V9H6a2 2 0 0 1-2-2Z"/><circle cx="16" cy="14" r="1.3" fill="currentColor"/></symbol>
+\f1\fs24 \
+
+\f0\fs34     <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path fill="none" stroke="currentColor" stroke-width="1.4" d="M3.5 12h17M12 3.5c2.5 2.4 2.5 14.6 0 17-2.5-2.4-2.5-14.6 0-17Z"/></symbol>
+\f1\fs24 \
+
+\f0\fs34     <symbol id="i-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M12 3 5 6v5c0 4.4 3 8.2 7 9.5 4-1.3 7-5.1 7-9.5V6l-7-3Z"/><path fill="none" stroke="currentColor" stroke-width="1.5" d="m9 12 2 2 4-4"/></symbol>
+\f1\fs24 \
+
+\f0\fs34     <symbol id="i-bolt" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M13 3 5 13h5l-1 8 8-10h-5z"/></symbol>
+\f1\fs24 \
+
+\f0\fs34     <symbol id="i-brush" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M15 4 20 9 10 19l-5 1 1-5z"/><path stroke="currentColor" stroke-width="1.5" d="m13 6 5 5"/></symbol>
+\f1\fs24 \
+
+\f0\fs34     <symbol id="i-arrows" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M8 7 4 11l4 4M4 11h9m3 6 4-4-4-4m4 4h-9"/></symbol>
+\f1\fs24 \
+
+\f0\fs34     <symbol id="i-send" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="m21 4-9 8m9-8-6 16-3-7-7-3z"/></symbol>
+\f1\fs24 \
+
+\f0\fs34     <symbol id="i-up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 19V6m-6 6 6-6 6 6"/></symbol>
+\f1\fs24 \
+
+\f0\fs34     <symbol id="i-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 5v13m6-6-6 6-6-6"/></symbol>
+\f1\fs24 \
+
+\f0\fs34     <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M12 7.5V12l3 2"/></symbol>
+\f1\fs24 \
+
+\f0\fs34     <symbol id="i-emote" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="10" r="1" fill="currentColor"/><circle cx="15" cy="10" r="1" fill="currentColor"/><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M8.5 14a4 4 0 0 0 7 0"/></symbol>
+\f1\fs24 \
+
+\f0\fs34     <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></symbol>
+\f1\fs24 \
+
+\f0\fs34     <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M12 21s7-5.7 7-11a7 7 0 1 0-14 0c0 5.3 7 11 7 11Z"/><circle cx="12" cy="10" r="2.4" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+\f1\fs24 \
+
+\f0\fs34     <symbol id="i-cam" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M4 8h3l1.5-2h7L18 8h2a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13" r="3.2" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+\f1\fs24 \
+
+\f0\fs34   </defs>
+\f1\fs24 \
+
+\f0\fs34 </svg>
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 <div class="shell">
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   <!-- HEADER -->
+\f1\fs24 \
+
+\f0\fs34   <header class="top panel">
+\f1\fs24 \
+
+\f0\fs34     <div class="brand">
+\f1\fs24 \
+
+\f0\fs34       <div class="mark"><svg><use href="#i-hex"/></svg></div>
+\f1\fs24 \
+
+\f0\fs34       <div>
+\f1\fs24 \
+
+\f0\fs34         <h1>EchoVerse</h1>
+\f1\fs24 \
+
+\f0\fs34         <p>A Real-Time 3D World Platform</p>
+\f1\fs24 \
+
+\f0\fs34       </div>
+\f1\fs24 \
+
+\f0\fs34     </div>
+\f1\fs24 \
+
+\f0\fs34     <nav class="mainnav">
+\f1\fs24 \
+
+\f0\fs34       <button class="active"><svg class="ic"><use href="#i-map"/></svg>Map</button>
+\f1\fs24 \
+
+\f0\fs34       <button><svg class="ic"><use href="#i-bag"/></svg>Inventory</button>
+\f1\fs24 \
+
+\f0\fs34       <button><svg class="ic"><use href="#i-quest"/></svg>Quests</button>
+\f1\fs24 \
+
+\f0\fs34       <button><svg class="ic"><use href="#i-friends"/></svg>Friends</button>
+\f1\fs24 \
+
+\f0\fs34       <button><svg class="ic"><use href="#i-gear"/></svg>Settings</button>
+\f1\fs24 \
+
+\f0\fs34     </nav>
+\f1\fs24 \
+
+\f0\fs34     <div class="header-right">
+\f1\fs24 \
+
+\f0\fs34       <div class="online-badge">
+\f1\fs24 \
+
+\f0\fs34         <span class="pulse"><i></i></span>
+\f1\fs24 \
+
+\f0\fs34         <b id="online-num">1</b><span>Online</span>
+\f1\fs24 \
+
+\f0\fs34       </div>
+\f1\fs24 \
+
+\f0\fs34       <button class="avatar-btn" id="avatar-btn" title="Edit your handle">\'b7\'b7</button>
+\f1\fs24 \
+
+\f0\fs34     </div>
+\f1\fs24 \
+
+\f0\fs34   </header>
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   <!-- HERO -->
+\f1\fs24 \
+
+\f0\fs34   <section class="hero">
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0     <!-- feature rail -->
+\f1\fs24 \
+
+\f0\fs34     <aside class="rail panel">
+\f1\fs24 \
+
+\f0\fs34       <div class="panel-pad">
+\f1\fs24 \
+
+\f0\fs34         <div class="feature f-cyan">
+\f1\fs24 \
+
+\f0\fs34           <div class="fic"><svg class="ic"><use href="#i-users"/></svg></div>
+\f1\fs24 \
+
+\f0\fs34           <div><h3>Live Multiplayer</h3><p>Move, explore, and connect in real time.</p></div>
+\f1\fs24 \
+
+\f0\fs34         </div>
+\f1\fs24 \
+
+\f0\fs34         <div class="feature f-violet">
+\f1\fs24 \
+
+\f0\fs34           <div class="fic"><svg class="ic"><use href="#i-cpu"/></svg></div>
+\f1\fs24 \
+
+\f0\fs34           <div><h3>AI-Powered NPCs</h3><p>Talk with Aurora and other intelligent characters.</p></div>
+\f1\fs24 \
+
+\f0\fs34         </div>
+\f1\fs24 \
+
+\f0\fs34         <div class="feature f-pink">
+\f1\fs24 \
+
+\f0\fs34           <div class="fic"><svg class="ic"><use href="#i-tv"/></svg></div>
+\f1\fs24 \
+
+\f0\fs34           <div><h3>Watch Together</h3><p>Stream videos and watch in sync with friends.</p></div>
+\f1\fs24 \
+
+\f0\fs34         </div>
+\f1\fs24 \
+
+\f0\fs34         <div class="feature f-gold">
+\f1\fs24 \
+
+\f0\fs34           <div class="fic"><svg class="ic"><use href="#i-coin"/></svg></div>
+\f1\fs24 \
+
+\f0\fs34           <div><h3>Play &amp; Earn</h3><p>Play mini-games and earn ECHO tokens.</p></div>
+\f1\fs24 \
+
+\f0\fs34         </div>
+\f1\fs24 \
+
+\f0\fs34         <div class="feature f-green">
+\f1\fs24 \
+
+\f0\fs34           <div class="fic"><svg class="ic"><use href="#i-globe"/></svg></div>
+\f1\fs24 \
+
+\f0\fs34           <div><h3>Built for the Web</h3><p>No downloads. Just open and play.</p></div>
+\f1\fs24 \
+
+\f0\fs34         </div>
+\f1\fs24 \
+
+\f0\fs34       </div>
+\f1\fs24 \
+
+\f0\fs34     </aside>
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0     <!-- world stage -->
+\f1\fs24 \
+
+\f0\fs34     <div class="stage panel" id="stage" tabindex="0">
+\f1\fs24 \
+
+\f0\fs34       <canvas id="world-canvas"></canvas>
+\f1\fs24 \
+
+\f0\fs34       <div class="stage-grad"></div>
+\f1\fs24 \
+
+\f0\fs34       <div class="radar" id="radar"><div class="sweep"></div></div>
+\f1\fs24 \
+
+\f0\fs34       <div class="stage-inner">
+\f1\fs24 \
+
+\f0\fs34         <div class="stage-top">
+\f1\fs24 \
+
+\f0\fs34           <div class="world-tag"><svg class="ic"><use href="#i-pin"/></svg> NEON&nbsp;PLAZA \'b7 <b>Sector&nbsp;7</b></div>
+\f1\fs24 \
+
+\f0\fs34           <div class="you-tag" id="you-tag" title="Click to change your handle">
+\f1\fs24 \
+
+\f0\fs34             <span class="swatch" id="you-swatch"></span><b id="you-name">\'85</b>
+\f1\fs24 \
+
+\f0\fs34           </div>
+\f1\fs24 \
+
+\f0\fs34         </div>
+\f1\fs24 \
+
+\f0\fs34         <div>
+\f1\fs24 \
+
+\f0\fs34           <div class="world-chat" id="world-chat"></div>
+\f1\fs24 \
+
+\f0\fs34           <div class="dock">
+\f1\fs24 \
+
+\f0\fs34             <button title="Emote"><svg class="ic"><use href="#i-emote"/></svg></button>
+\f1\fs24 \
+
+\f0\fs34             <button title="Voice chat"><svg class="ic"><use href="#i-mic"/></svg></button>
+\f1\fs24 \
+
+\f0\fs34             <button title="Snapshot" id="snap-btn"><svg class="ic"><use href="#i-cam"/></svg></button>
+\f1\fs24 \
+
+\f0\fs34             <span class="sep"></span>
+\f1\fs24 \
+
+\f0\fs34             <span class="move-hint"><span class="kbd">W</span><span class="kbd">A</span><span class="kbd">S</span><span class="kbd">D</span> to move</span>
+\f1\fs24 \
+
+\f0\fs34           </div>
+\f1\fs24 \
+
+\f0\fs34         </div>
+\f1\fs24 \
+
+\f0\fs34       </div>
+\f1\fs24 \
+
+\f0\fs34     </div>
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0     <!-- AURORA NPC -->
+\f1\fs24 \
+
+\f0\fs34     <aside class="npc panel">
+\f1\fs24 \
+
+\f0\fs34       <div class="panel-pad">
+\f1\fs24 \
+
+\f0\fs34         <div class="panel-head">
+\f1\fs24 \
+
+\f0\fs34           <div class="panel-title"><svg class="ic"><use href="#i-cpu"/></svg> AI&nbsp;NPC</div>
+\f1\fs24 \
+
+\f0\fs34           <span class="chip live"><span class="dot"></span>Online</span>
+\f1\fs24 \
+
+\f0\fs34         </div>
+\f1\fs24 \
+
+\f0\fs34         <div class="face-wrap">
+\f1\fs24 \
+
+\f0\fs34           <div class="scan"></div>
+\f1\fs24 \
+
+\f0\fs34           <svg viewBox="0 0 120 120" fill="none" stroke="#2fe3ff" stroke-width="0.9" stroke-linejoin="round" opacity="0.92">
+\f1\fs24 \
+
+\f0\fs34             <path d="M60 14 38 26v30l22 36 22-36V26z" stroke-opacity="0.5"/>
+\f1\fs24 \
+
+\f0\fs34             <path d="M60 14v78M38 26l22 14 22-14M38 56l22-16 22 16M38 56l22 36 22-36"/>
+\f1\fs24 \
+
+\f0\fs34             <path d="M46 40l-6 8 8 10M74 40l6 8-8 10" stroke-opacity="0.7"/>
+\f1\fs24 \
+
+\f0\fs34             <circle cx="50" cy="52" r="3.4" fill="#2fe3ff" stroke="none"/>
+\f1\fs24 \
+
+\f0\fs34             <circle cx="70" cy="52" r="3.4" fill="#2fe3ff" stroke="none"/>
+\f1\fs24 \
+
+\f0\fs34             <path d="M52 70c4 4 12 4 16 0" stroke-opacity="0.8"/>
+\f1\fs24 \
+
+\f0\fs34             <path d="M30 40v40M90 40v40" stroke-opacity="0.25"/>
+\f1\fs24 \
+
+\f0\fs34           </svg>
+\f1\fs24 \
+
+\f0\fs34         </div>
+\f1\fs24 \
+
+\f0\fs34         <div class="npc-name">
+\f1\fs24 \
+
+\f0\fs34           <h2>AURORA</h2><small>Companion AI</small>
+\f1\fs24 \
+
+\f0\fs34         </div>
+\f1\fs24 \
+
+\f0\fs34         <div class="npc-feed" id="npc-feed"></div>
+\f1\fs24 \
+
+\f0\fs34         <div class="quick" id="quick">
+\f1\fs24 \
+
+\f0\fs34           <button data-q="What's your favorite place here?">What's your favorite place here?</button>
+\f1\fs24 \
+
+\f0\fs34           <button data-q="Tell me something interesting.">Tell me something interesting.</button>
+\f1\fs24 \
+
+\f0\fs34           <button data-q="Can you help me with a quest?">Can you help me with a quest?</button>
+\f1\fs24 \
+
+\f0\fs34         </div>
+\f1\fs24 \
+
+\f0\fs34         <div class="npc-input">
+\f1\fs24 \
+
+\f0\fs34           <input id="npc-field" class="field" placeholder="Message Aurora\'85" maxlength="240" autocomplete="off" />
+\f1\fs24 \
+
+\f0\fs34           <button class="send-btn" id="npc-send"><svg class="ic"><use href="#i-send"/></svg></button>
+\f1\fs24 \
+
+\f0\fs34         </div>
+\f1\fs24 \
+
+\f0\fs34       </div>
+\f1\fs24 \
+
+\f0\fs34     </aside>
+\f1\fs24 \
+
+\f0\fs34   </section>
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   <!-- BOTTOM 4 CARDS -->
+\f1\fs24 \
+
+\f0\fs34   <section class="grid4">
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0     <!-- chat & social -->
+\f1\fs24 \
+
+\f0\fs34     <div class="panel">
+\f1\fs24 \
+
+\f0\fs34       <div class="panel-pad">
+\f1\fs24 \
+
+\f0\fs34         <div class="panel-head">
+\f1\fs24 \
+
+\f0\fs34           <div class="panel-title"><svg class="ic"><use href="#i-users"/></svg> Chat &amp; Social</div>
+\f1\fs24 \
+
+\f0\fs34           <span class="chip" id="social-count">#general</span>
+\f1\fs24 \
+
+\f0\fs34         </div>
+\f1\fs24 \
+
+\f0\fs34         <div class="social-body">
+\f1\fs24 \
+
+\f0\fs34           <div class="channels" id="channels">
+\f1\fs24 \
+
+\f0\fs34             <div class="ch on" data-ch="general"><span class="h">#</span> general</div>
+\f1\fs24 \
+
+\f0\fs34             <div class="ch" data-ch="explorers"><span class="h">#</span> explorers</div>
+\f1\fs24 \
+
+\f0\fs34             <div class="ch" data-ch="trades"><span class="h">#</span> trades</div>
+\f1\fs24 \
+
+\f0\fs34             <div class="ch" data-ch="quests"><span class="h">#</span> quests</div>
+\f1\fs24 \
+
+\f0\fs34             <div class="ch" data-ch="off-grid"><span class="h">#</span> off-grid</div>
+\f1\fs24 \
+
+\f0\fs34           </div>
+\f1\fs24 \
+
+\f0\fs34           <div class="chat-stream" id="chat-stream"></div>
+\f1\fs24 \
+
+\f0\fs34         </div>
+\f1\fs24 \
+
+\f0\fs34       </div>
+\f1\fs24 \
+
+\f0\fs34     </div>
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0     <!-- watch together -->
+\f1\fs24 \
+
+\f0\fs34     <div class="panel">
+\f1\fs24 \
+
+\f0\fs34       <div class="panel-pad">
+\f1\fs24 \
+
+\f0\fs34         <div class="panel-head">
+\f1\fs24 \
+
+\f0\fs34           <div class="panel-title"><svg class="ic"><use href="#i-tv"/></svg> Watch Together</div>
+\f1\fs24 \
+
+\f0\fs34           <span class="chip live"><span class="dot"></span>Sync</span>
+\f1\fs24 \
+
+\f0\fs34         </div>
+\f1\fs24 \
+
+\f0\fs34         <div class="player-box">
+\f1\fs24 \
+
+\f0\fs34           <svg class="dragon" viewBox="0 0 64 64" fill="none" stroke="#ffd6ec" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+\f1\fs24 \
+
+\f0\fs34             <path d="M8 40c6-2 {\field{\*\fldinst{HYPERLINK "tel:10-8%209-15%205%206%205%2014%202"}}{\fldrslt 10-8 9-15 5 6 5 14 2}} {\field{\*\fldinst{HYPERLINK "tel:19%207-1%2013-6%2015-13%202"}}{\fldrslt 19 7-1 13-6 15-13 2}} 8-2 {\field{\*\fldinst{HYPERLINK "tel:16-9%2020%205%201%2011-1"}}{\fldrslt 16-9 20 5 1 11-1}} {\field{\*\fldinst{HYPERLINK "tel:15-5-3%209-13%2015-23"}}{\fldrslt 15-5-3 9-13 15-23}} 13C9 51 6 45 8 40Z"/>
+\f1\fs24 \
+
+\f0\fs34             <path d="M40 22l8-8m-8 14 12-4"/>
+\f1\fs24 \
+
+\f0\fs34             <circle cx="22" cy="33" r="1.4" fill="#ffd6ec"/>
+\f1\fs24 \
+
+\f0\fs34           </svg>
+\f1\fs24 \
+
+\f0\fs34           <button class="play-circle" id="wt-play"><svg class="ic"><use href="#i-play"/></svg></button>
+\f1\fs24 \
+
+\f0\fs34           <div class="scrub">
+\f1\fs24 \
+
+\f0\fs34             <div class="bar"><i id="wt-bar"></i></div>
+\f1\fs24 \
+
+\f0\fs34             <div class="meta"><span id="wt-cur">18:42</span><span>49:05</span></div>
+\f1\fs24 \
+
+\f0\fs34           </div>
+\f1\fs24 \
+
+\f0\fs34         </div>
+\f1\fs24 \
+
+\f0\fs34         <div class="watch-now">Now playing \'b7 <b>House of the Dragon</b> \'97 S2 E4</div>
+\f1\fs24 \
+
+\f0\fs34         <div class="viewers">
+\f1\fs24 \
+
+\f0\fs34           <div class="pfp" style="background:#2fe3ff">NV</div>
+\f1\fs24 \
+
+\f0\fs34           <div class="pfp" style="background:#8a6bff">LU</div>
+\f1\fs24 \
+
+\f0\fs34           <div class="pfp" style="background:#ff5db1">SB</div>
+\f1\fs24 \
+
+\f0\fs34           <div class="pfp" style="background:#34e6a8">KO</div>
+\f1\fs24 \
+
+\f0\fs34           <span class="more">+23 watching</span>
+\f1\fs24 \
+
+\f0\fs34         </div>
+\f1\fs24 \
+
+\f0\fs34       </div>
+\f1\fs24 \
+
+\f0\fs34     </div>
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0     <!-- mini games -->
+\f1\fs24 \
+
+\f0\fs34     <div class="panel">
+\f1\fs24 \
+
+\f0\fs34       <div class="panel-pad">
+\f1\fs24 \
+
+\f0\fs34         <div class="panel-head">
+\f1\fs24 \
+
+\f0\fs34           <div class="panel-title"><svg class="ic"><use href="#i-coin"/></svg> Mini Games</div>
+\f1\fs24 \
+
+\f0\fs34           <span class="chip">Arcade</span>
+\f1\fs24 \
+
+\f0\fs34         </div>
+\f1\fs24 \
+
+\f0\fs34         <div class="game-box" id="game-box">
+\f1\fs24 \
+
+\f0\fs34           <div class="glow"></div>
+\f1\fs24 \
+
+\f0\fs34           <div class="title">COIN RUSH</div>
+\f1\fs24 \
+
+\f0\fs34           <div class="score">SCORE <span id="game-score">0</span></div>
+\f1\fs24 \
+
+\f0\fs34         </div>
+\f1\fs24 \
+
+\f0\fs34         <div class="lboard">
+\f1\fs24 \
+
+\f0\fs34           <div class="lrow"><span class="rk gold">01</span><span class="nm">CyberNova</span><span class="pts">9,310</span></div>
+\f1\fs24 \
+
+\f0\fs34           <div class="lrow"><span class="rk silv">02</span><span class="nm">Lunaf</span><span class="pts">7,540</span></div>
+\f1\fs24 \
+
+\f0\fs34           <div class="lrow"><span class="rk bron">03</span><span class="nm" id="me-row">ShadowBlade</span><span class="pts" id="me-pts">6,330</span></div>
+\f1\fs24 \
+
+\f0\fs34         </div>
+\f1\fs24 \
+
+\f0\fs34         <button class="play-btn" id="play-game"><svg class="ic"><use href="#i-play"/></svg> Play</button>
+\f1\fs24 \
+
+\f0\fs34       </div>
+\f1\fs24 \
+
+\f0\fs34     </div>
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0     <!-- crypto wallet -->
+\f1\fs24 \
+
+\f0\fs34     <div class="panel">
+\f1\fs24 \
+
+\f0\fs34       <div class="panel-pad">
+\f1\fs24 \
+
+\f0\fs34         <div class="panel-head">
+\f1\fs24 \
+
+\f0\fs34           <div class="panel-title"><svg class="ic"><use href="#i-wallet"/></svg> Crypto Wallet</div>
+\f1\fs24 \
+
+\f0\fs34           <span class="chip">ECHO</span>
+\f1\fs24 \
+
+\f0\fs34         </div>
+\f1\fs24 \
+
+\f0\fs34         <div class="balance">
+\f1\fs24 \
+
+\f0\fs34           <span class="amt" id="wallet-amt">2,458</span><span class="cur">ECHO</span>
+\f1\fs24 \
+
+\f0\fs34         </div>
+\f1\fs24 \
+
+\f0\fs34         <div class="delta">+210.00 <span style="color:var(--ink-mute)">(+9.3% this week)</span></div>
+\f1\fs24 \
+
+\f0\fs34         <div class="wallet-actions">
+\f1\fs24 \
+
+\f0\fs34           <button id="w-send"><span class="ic"><svg class="ic"><use href="#i-send"/></svg></span>Send</button>
+\f1\fs24 \
+
+\f0\fs34           <button id="w-recv"><span class="ic"><svg class="ic"><use href="#i-arrows"/></svg></span>Receive</button>
+\f1\fs24 \
+
+\f0\fs34           <button id="w-hist"><span class="ic"><svg class="ic"><use href="#i-clock"/></svg></span>History</button>
+\f1\fs24 \
+
+\f0\fs34         </div>
+\f1\fs24 \
+
+\f0\fs34         <div class="tx">
+\f1\fs24 \
+
+\f0\fs34           <div class="txrow">
+\f1\fs24 \
+
+\f0\fs34             <div class="ti in"><svg class="ic"><use href="#i-down"/></svg></div>
+\f1\fs24 \
+
+\f0\fs34             <div class="td"><div class="t1">Coin Rush \'97 top-3 reward</div><div class="t2">2h ago</div></div>
+\f1\fs24 \
+
+\f0\fs34             <div class="tv in">+128.40</div>
+\f1\fs24 \
+
+\f0\fs34           </div>
+\f1\fs24 \
+
+\f0\fs34           <div class="txrow">
+\f1\fs24 \
+
+\f0\fs34             <div class="ti out"><svg class="ic"><use href="#i-up"/></svg></div>
+\f1\fs24 \
+
+\f0\fs34             <div class="td"><div class="t1">Avatar skin \'b7 Voidwalker</div><div class="t2">Yesterday</div></div>
+\f1\fs24 \
+
+\f0\fs34             <div class="tv out">\uc0\u8722 42.75</div>
+\f1\fs24 \
+
+\f0\fs34           </div>
+\f1\fs24 \
+
+\f0\fs34           <div class="txrow">
+\f1\fs24 \
+
+\f0\fs34             <div class="ti in"><svg class="ic"><use href="#i-down"/></svg></div>
+\f1\fs24 \
+
+\f0\fs34             <div class="td"><div class="t1">Quest: Neon Relay</div><div class="t2">2d ago</div></div>
+\f1\fs24 \
+
+\f0\fs34             <div class="tv in">+96.20</div>
+\f1\fs24 \
+
+\f0\fs34           </div>
+\f1\fs24 \
+
+\f0\fs34         </div>
+\f1\fs24 \
+
+\f0\fs34         <div class="panel-foot"><button id="view-all">View all transactions</button></div>
+\f1\fs24 \
+
+\f0\fs34       </div>
+\f1\fs24 \
+
+\f0\fs34     </div>
+\f1\fs24 \
+
+\f0\fs34   </section>
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   <!-- FEATURE STRIP -->
+\f1\fs24 \
+
+\f0\fs34   <section class="strip panel">
+\f1\fs24 \
+
+\f0\fs34     <div class="cell"><div class="si" style="color:var(--cyan);background:rgba(47,227,255,.08)"><svg class="ic"><use href="#i-bolt"/></svg></div>
+\f1\fs24 \
+
+\f0\fs34       <div><h4>Real-Time</h4><p>Built on live presence for instant updates.</p></div></div>
+\f1\fs24 \
+
+\f0\fs34     <div class="cell"><div class="si" style="color:var(--violet);background:rgba(138,107,255,.1)"><svg class="ic"><use href="#i-cpu"/></svg></div>
+\f1\fs24 \
+
+\f0\fs34       <div><h4>AI Powered</h4><p>Characters that listen and respond.</p></div></div>
+\f1\fs24 \
+
+\f0\fs34     <div class="cell"><div class="si" style="color:var(--ink-dim);background:rgba(255,255,255,.04)"><svg class="ic"><use href="#i-globe"/></svg></div>
+\f1\fs24 \
+
+\f0\fs34       <div><h4>Cross Platform</h4><p>Desktop, mobile, and VR ready.</p></div></div>
+\f1\fs24 \
+
+\f0\fs34     <div class="cell"><div class="si" style="color:var(--green);background:rgba(52,230,168,.08)"><svg class="ic"><use href="#i-shield"/></svg></div>
+\f1\fs24 \
+
+\f0\fs34       <div><h4>Secure</h4><p>Ownership powered by ECHO tokens.</p></div></div>
+\f1\fs24 \
+
+\f0\fs34     <div class="cell"><div class="si" style="color:var(--gold);background:rgba(255,194,75,.1)"><svg class="ic"><use href="#i-brush"/></svg></div>
+\f1\fs24 \
+
+\f0\fs34       <div><h4>For Creators</h4><p>Build, sell, and host your own worlds.</p></div></div>
+\f1\fs24 \
+
+\f0\fs34   </section>
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   <div class="footnote">EchoVerse runs on Netlify \'b7 live world &amp; <b>Aurora</b> powered by Netlify Functions, Database &amp; AI Gateway</div>
+\f1\fs24 \
+
+\f0\fs34 </div>
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 <div id="toast"><svg class="ic"><use href="#i-bolt"/></svg><span id="toast-text"></span></div>
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 <script type="importmap">
+\f1\fs24 \
+
+\f0\fs34 \{ "imports": \{ "three": "{\field{\*\fldinst{HYPERLINK "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}{\fldrslt https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js}}" \} \}
+\f1\fs24 \
+
+\f0\fs34 </script>
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 <script type="module">
+\f1\fs24 \
+
+\f0\fs34 import * as THREE from 'three';
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 /* \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  helpers \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  */
+\f1\fs24 \
+
+\f0\fs34 const $ = s => document.querySelector(s);
+\f1\fs24 \
+
+\f0\fs34 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+\f1\fs24 \
+
+\f0\fs34 const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 function toast(msg) \{
+\f1\fs24 \
+
+\f0\fs34   const t = $('#toast'); $('#toast-text').textContent = msg;
+\f1\fs24 \
+
+\f0\fs34   t.classList.add('show'); clearTimeout(toast._t);
+\f1\fs24 \
+
+\f0\fs34   toast._t = setTimeout(() => t.classList.remove('show'), 2600);
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 const PALETTE = ['#2fe3ff','#8a6bff','#ff5db1','#34e6a8','#ffc24b','#ff7a59','#4fd0ff','#c074ff'];
+\f1\fs24 \
+
+\f0\fs34 function pickColor(seed)\{ let h=0; for(const c of seed) h=(h*31+c.charCodeAt(0))>>>0; return PALETTE[h%PALETTE.length]; \}
+\f1\fs24 \
+
+\f0\fs34 function initials(n)\{ return n.replace(/[^a-zA-Z0-9 ]/g,'').split(/\\s+/).map(w=>w[0]||'').join('').slice(0,2).toUpperCase() || 'TR'; \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 /* identity */
+\f1\fs24 \
+
+\f0\fs34 const ADJ = ['Neon','Lunar','Void','Pixel','Echo','Cyber','Astro','Nova','Solar','Glitch','Quartz','Onyx'];
+\f1\fs24 \
+
+\f0\fs34 const NOUN = ['Wanderer','Drifter','Ranger','Sprite','Falcon','Comet','Wraith','Pilot','Nomad','Spark','Cipher','Wolf'];
+\f1\fs24 \
+
+\f0\fs34 function genHandle()\{ return ADJ[Math.floor(Math.random()*ADJ.length)] + NOUN[Math.floor(Math.random()*NOUN.length)] + Math.floor(10+Math.random()*89); \}
+\f1\fs24 \
+
+\f0\fs34 function genId()\{ return crypto?.randomUUID ? crypto.randomUUID() : Array.from(\{length:16\},()=>Math.floor(Math.random()*16).toString(16)).join(''); \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 let myId   = localStorage.getItem('ev_id')   || genId();
+\f1\fs24 \
+
+\f0\fs34 let myName = localStorage.getItem('ev_name') || genHandle();
+\f1\fs24 \
+
+\f0\fs34 let myColor= pickColor(myId);
+\f1\fs24 \
+
+\f0\fs34 localStorage.setItem('ev_id', myId);
+\f1\fs24 \
+
+\f0\fs34 localStorage.setItem('ev_name', myName);
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 /* \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  3D world (scoped to stage) \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  */
+\f1\fs24 \
+
+\f0\fs34 const canvas = $('#world-canvas');
+\f1\fs24 \
+
+\f0\fs34 const stage  = $('#stage');
+\f1\fs24 \
+
+\f0\fs34 const renderer = new THREE.WebGLRenderer(\{ canvas, antialias:true, alpha:false \});
+\f1\fs24 \
+
+\f0\fs34 renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+\f1\fs24 \
+
+\f0\fs34 renderer.toneMapping = THREE.ACESFilmicToneMapping;
+\f1\fs24 \
+
+\f0\fs34 renderer.toneMappingExposure = 1.12;
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 const scene = new THREE.Scene();
+\f1\fs24 \
+
+\f0\fs34 // dusk gradient sky backdrop
+\f1\fs24 \
+
+\f0\fs34 const skyC=document.createElement('canvas'); skyC.width=8; skyC.height=256;
+\f1\fs24 \
+
+\f0\fs34 \{ const sx=skyC.getContext('2d'); const sg=sx.createLinearGradient(0,0,0,256);
+\f1\fs24 \
+
+\f0\fs34   sg.addColorStop(0,'#1c1146'); sg.addColorStop(.42,'#1a1b40'); sg.addColorStop(.74,'#0d1330'); sg.addColorStop(1,'#0a1c30');
+\f1\fs24 \
+
+\f0\fs34   sx.fillStyle=sg; sx.fillRect(0,0,8,256); \}
+\f1\fs24 \
+
+\f0\fs34 scene.background=new THREE.CanvasTexture(skyC);
+\f1\fs24 \
+
+\f0\fs34 scene.fog = new THREE.FogExp2(0x0c1130, 0.019);
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 const cam = new THREE.PerspectiveCamera(58, 1, 0.1, 260);
+\f1\fs24 \
+
+\f0\fs34 cam.position.set(0,4.6,11); cam.lookAt(0,1.2,-5);
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 function resize()\{
+\f1\fs24 \
+
+\f0\fs34   const w = stage.clientWidth, h = stage.clientHeight;
+\f1\fs24 \
+
+\f0\fs34   if(!w||!h) return;
+\f1\fs24 \
+
+\f0\fs34   renderer.setSize(w,h,false);
+\f1\fs24 \
+
+\f0\fs34   cam.aspect = w/h; cam.updateProjectionMatrix();
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+
+\f0\fs34 new ResizeObserver(resize).observe(stage);
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 scene.add(new THREE.AmbientLight(0x232c4e, 1.5));
+\f1\fs24 \
+
+\f0\fs34 const key = new THREE.DirectionalLight(0x6f8cff, 1.6); key.position.set(8,18,6); scene.add(key);
+\f1\fs24 \
+
+\f0\fs34 const fill  = new THREE.PointLight(0x8a6bff, 14, 70); fill.position.set(-13,9,-12);  scene.add(fill);
+\f1\fs24 \
+
+\f0\fs34 const fill2 = new THREE.PointLight(0xff5db1, 11, 64); fill2.position.set(15,7,-18);   scene.add(fill2);
+\f1\fs24 \
+
+\f0\fs34 const fill3 = new THREE.PointLight(0x2fe3ff, 11, 60); fill3.position.set(0,5,9);       scene.add(fill3);
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 /* reflective plaza floor + neon grid */
+\f1\fs24 \
+
+\f0\fs34 const floor = new THREE.Mesh(
+\f1\fs24 \
+
+\f0\fs34   new THREE.PlaneGeometry(400,400),
+\f1\fs24 \
+
+\f0\fs34   new THREE.MeshStandardMaterial(\{ color:0x070b18, roughness:.55, metalness:.42 \})
+\f1\fs24 \
+
+\f0\fs34 );
+\f1\fs24 \
+
+\f0\fs34 floor.rotation.x = -Math.PI/2; scene.add(floor);
+\f1\fs24 \
+
+\f0\fs34 const grid = new THREE.GridHelper(180, 90, 0x2fe3ff, 0x123a55);
+\f1\fs24 \
+
+\f0\fs34 grid.material.transparent = true; grid.material.opacity = .42; scene.add(grid);
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 const ring = new THREE.Mesh(new THREE.TorusGeometry(22,.08,6,120),
+\f1\fs24 \
+
+\f0\fs34   new THREE.MeshBasicMaterial(\{ color:0x2fe3ff, transparent:true, opacity:.3 \}));
+\f1\fs24 \
+
+\f0\fs34 ring.rotation.x = Math.PI/2; ring.position.y=.05; scene.add(ring);
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 /* \uc0\u9472 \u9472 \u9472 \u9472 \u9472  neon city skyline framing the plaza \u9472 \u9472 \u9472 \u9472 \u9472  */
+\f1\fs24 \
+
+\f0\fs34 const NEON = [0x2fe3ff,0x8a6bff,0xff5db1,0x34e6a8,0xffc24b];
+\f1\fs24 \
+
+\f0\fs34 function windowTex(tint)\{
+\f1\fs24 \
+
+\f0\fs34   const c=document.createElement('canvas'); c.width=64; c.height=128; const x=c.getContext('2d');
+\f1\fs24 \
+
+\f0\fs34   x.fillStyle='#03050d'; x.fillRect(0,0,64,128);
+\f1\fs24 \
+
+\f0\fs34   const lit='#'+new THREE.Color(tint).getHexString();
+\f1\fs24 \
+
+\f0\fs34   for(let yy=8; yy<124; yy+=11) for(let xx=6; xx<60; xx+=11)\{
+\f1\fs24 \
+
+\f0\fs34     const r=Math.random();
+\f1\fs24 \
+
+\f0\fs34     x.fillStyle = r<0.34 ? lit : (r<0.52?'#0c1a2e':'#06101f');
+\f1\fs24 \
+
+\f0\fs34     x.fillRect(xx,yy,7,8);
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   return new THREE.CanvasTexture(c);
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+
+\f0\fs34 const winTex = NEON.map(windowTex);
+\f1\fs24 \
+
+\f0\fs34 const cityGroup = new THREE.Group(); scene.add(cityGroup);
+\f1\fs24 \
+
+\f0\fs34 function building(x,z,w,d,h,tint)\{
+\f1\fs24 \
+
+\f0\fs34   const idx=NEON.indexOf(tint); const tex=winTex[idx<0?0:idx];
+\f1\fs24 \
+
+\f0\fs34   const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),
+\f1\fs24 \
+
+\f0\fs34     new THREE.MeshStandardMaterial(\{ map:tex, emissive:0xffffff, emissiveMap:tex, emissiveIntensity:.55, roughness:.78, metalness:.32 \}));
+\f1\fs24 \
+
+\f0\fs34   m.position.set(x,h/2,z); cityGroup.add(m);
+\f1\fs24 \
+
+\f0\fs34   const trim=new THREE.Mesh(new THREE.BoxGeometry(w*1.04,.2,d*1.04),
+\f1\fs24 \
+
+\f0\fs34     new THREE.MeshBasicMaterial(\{ color:tint \})); trim.position.set(x,h,z); cityGroup.add(trim);
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+
+\f0\fs34 // deterministic skyline (no Math.random for layout, so it stays stable)
+\f1\fs24 \
+
+\f0\fs34 let _s=987654; const rnd=()=>\{ _s=(_s*9301+49297)%233280; return _s/233280; \};
+\f1\fs24 \
+
+\f0\fs34 for(let x=-50; x<=50; x+=8)\{           // back wall
+\f1\fs24 \
+
+\f0\fs34   building(x+rnd()*3, -36-rnd()*12, 5+rnd()*2.5, 5+rnd()*2.5, 11+rnd()*28, NEON[Math.floor(rnd()*NEON.length)]);
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+
+\f0\fs34 for(let z=6; z>=-36; z-=8)\{            // flanks
+\f1\fs24 \
+
+\f0\fs34   building(-31-rnd()*9, z, 5+rnd()*2.5, 5+rnd()*2.5, 8+rnd()*22, NEON[Math.floor(rnd()*NEON.length)]);
+\f1\fs24 \
+
+\f0\fs34   building( 31+rnd()*9, z, 5+rnd()*2.5, 5+rnd()*2.5, 8+rnd()*22, NEON[Math.floor(rnd()*NEON.length)]);
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 /* glowing storefront signs */
+\f1\fs24 \
+
+\f0\fs34 function neonSign(text,color)\{
+\f1\fs24 \
+
+\f0\fs34   const c=document.createElement('canvas'); c.width=512; c.height=128; const x=c.getContext('2d');
+\f1\fs24 \
+
+\f0\fs34   x.font='bold 70px "Chakra Petch", Arial'; x.textAlign='center'; x.textBaseline='middle';
+\f1\fs24 \
+
+\f0\fs34   const col='#'+new THREE.Color(color).getHexString();
+\f1\fs24 \
+
+\f0\fs34   x.shadowColor=col; x.shadowBlur=30; x.fillStyle=col; x.fillText(text,256,64);
+\f1\fs24 \
+
+\f0\fs34   x.shadowBlur=8; x.fillStyle='#ffffff'; x.fillText(text,256,64);
+\f1\fs24 \
+
+\f0\fs34   const s=new THREE.Sprite(new THREE.SpriteMaterial(\{ map:new THREE.CanvasTexture(c), transparent:true, depthWrite:false \}));
+\f1\fs24 \
+
+\f0\fs34   s.scale.set(Math.max(4,text.length*0.62), 1.7, 1); return s;
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+
+\f0\fs34 [['CYBERROSE',0xff5db1,-17,5.5,-21],['OLIVERPUNK',0x8a6bff,16,6,-25],['DEEPTHINK',0x2fe3ff,0,9.5,-32],
+\f1\fs24 \
+
+\f0\fs34  ['NEON\'b79',0x34e6a8,-27,4,-12],['HOLOBAR',0xffc24b,27,4.5,-14]].forEach(([t,c,px,py,pz])=>\{
+\f1\fs24 \
+
+\f0\fs34   const s=neonSign(t,c); s.position.set(px,py,pz); cityGroup.add(s);
+\f1\fs24 \
+
+\f0\fs34 \});
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 /* distant glow haze on the horizon */
+\f1\fs24 \
+
+\f0\fs34 const haze=new THREE.Mesh(new THREE.PlaneGeometry(320,80),
+\f1\fs24 \
+
+\f0\fs34   new THREE.MeshBasicMaterial(\{ color:0x1a1240, transparent:true, opacity:.45 \}));
+\f1\fs24 \
+
+\f0\fs34 haze.position.set(0,16,-62); cityGroup.add(haze);
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 /* Aurora \'97 AI 3D face (renders her in-world presence and spoken responses) */
+\f1\fs24 \
+
+\f0\fs34 const aurora = new THREE.Group(); aurora.position.set(0,1.9,-7); scene.add(aurora);
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 // holographic head
+\f1\fs24 \
+
+\f0\fs34 const aCore = new THREE.Mesh(new THREE.IcosahedronGeometry(1.15,2),
+\f1\fs24 \
+
+\f0\fs34   new THREE.MeshStandardMaterial(\{ color:0x2fe3ff, emissive:0x123c4a, emissiveIntensity:.7, roughness:.16, metalness:.55, flatShading:true \}));
+\f1\fs24 \
+
+\f0\fs34 aurora.add(aCore);
+\f1\fs24 \
+
+\f0\fs34 // soft aura shell
+\f1\fs24 \
+
+\f0\fs34 aurora.add(new THREE.Mesh(new THREE.SphereGeometry(1.5,24,24),
+\f1\fs24 \
+
+\f0\fs34   new THREE.MeshBasicMaterial(\{ color:0x2fe3ff, transparent:true, opacity:.05, side:THREE.BackSide \})));
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 // eyes
+\f1\fs24 \
+
+\f0\fs34 const eyeMat = new THREE.MeshBasicMaterial(\{ color:0xeafcff \});
+\f1\fs24 \
+
+\f0\fs34 const eyeL = new THREE.Mesh(new THREE.SphereGeometry(.15,16,16), eyeMat); eyeL.position.set(-.42,.24,1.0);
+\f1\fs24 \
+
+\f0\fs34 const eyeR = new THREE.Mesh(new THREE.SphereGeometry(.15,16,16), eyeMat); eyeR.position.set(.42,.24,1.0);
+\f1\fs24 \
+
+\f0\fs34 aurora.add(eyeL, eyeR);
+\f1\fs24 \
+
+\f0\fs34 const eyeLight = new THREE.PointLight(0x9ff3ff,1.1,4); eyeLight.position.set(0,.24,1.3); aurora.add(eyeLight);
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 // brows (driven by emotion)
+\f1\fs24 \
+
+\f0\fs34 const browMat = new THREE.MeshBasicMaterial(\{ color:0x9ff3ff \});
+\f1\fs24 \
+
+\f0\fs34 const browL = new THREE.Mesh(new THREE.BoxGeometry(.36,.06,.06), browMat); browL.position.set(-.42,.55,1.0);
+\f1\fs24 \
+
+\f0\fs34 const browR = new THREE.Mesh(new THREE.BoxGeometry(.36,.06,.06), browMat); browR.position.set(.42,.55,1.0);
+\f1\fs24 \
+
+\f0\fs34 aurora.add(browL, browR);
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 // mouth \'97 animates open/closed while speaking, curves with emotion
+\f1\fs24 \
+
+\f0\fs34 const mouth = new THREE.Mesh(new THREE.TorusGeometry(.34,.05,8,28,Math.PI),
+\f1\fs24 \
+
+\f0\fs34   new THREE.MeshBasicMaterial(\{ color:0x9ff3ff \}));
+\f1\fs24 \
+
+\f0\fs34 mouth.position.set(0,-.46,1.0); mouth.rotation.z=Math.PI; aurora.add(mouth);
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 // orbiting accent rings
+\f1\fs24 \
+
+\f0\fs34 const aRings=[];
+\f1\fs24 \
+
+\f0\fs34 [[1.7,Math.PI/2.4,.22],[2.0,Math.PI/3,.14]].forEach(([r,rx,op])=>\{
+\f1\fs24 \
+
+\f0\fs34   const m=new THREE.Mesh(new THREE.TorusGeometry(r,.02,8,100),
+\f1\fs24 \
+
+\f0\fs34     new THREE.MeshBasicMaterial(\{ color:0x2fe3ff, transparent:true, opacity:op \}));
+\f1\fs24 \
+
+\f0\fs34   m.rotation.x=rx; aurora.add(m); aRings.push(m);
+\f1\fs24 \
+
+\f0\fs34 \});
+\f1\fs24 \
+
+\f0\fs34 aurora.add(new THREE.PointLight(0x2fe3ff, 5, 16));
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 /* label sprite */
+\f1\fs24 \
+
+\f0\fs34 function sprite(text,color)\{
+\f1\fs24 \
+
+\f0\fs34   const c=document.createElement('canvas'); c.width=256; c.height=64; const x=c.getContext('2d');
+\f1\fs24 \
+
+\f0\fs34   x.font='bold 26px "Chakra Petch", Arial'; x.textAlign='center'; x.textBaseline='middle';
+\f1\fs24 \
+
+\f0\fs34   x.lineWidth=4; x.strokeStyle='rgba(0,0,0,.6)'; x.strokeText(text,128,32);
+\f1\fs24 \
+
+\f0\fs34   x.fillStyle=color; x.fillText(text,128,32);
+\f1\fs24 \
+
+\f0\fs34   const t=new THREE.CanvasTexture(c);
+\f1\fs24 \
+
+\f0\fs34   const s=new THREE.Sprite(new THREE.SpriteMaterial(\{ map:t, transparent:true, depthTest:false \}));
+\f1\fs24 \
+
+\f0\fs34   s.scale.set(3.1,.78,1); return s;
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+
+\f0\fs34 const aLbl=sprite('AURORA','#9ff3ff'); aLbl.position.set(0,1.95,0); aurora.add(aLbl);
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 /* in-world speech panel \'97 shows Aurora's latest spoken response (the AI3DFace "response") */
+\f1\fs24 \
+
+\f0\fs34 function roundRect(x,a,b,w,h,r)\{ x.beginPath(); x.moveTo(a+r,b); x.arcTo(a+w,b,a+w,b+h,r); x.arcTo(a+w,b+h,a,b+h,r); x.arcTo(a,b+h,a,b,r); x.arcTo(a,b,a+w,b,r); x.closePath(); \}
+\f1\fs24 \
+
+\f0\fs34 function wrapLines(x,text,maxW)\{
+\f1\fs24 \
+
+\f0\fs34   const words=String(text).split(/\\s+/); let line='', lines=[];
+\f1\fs24 \
+
+\f0\fs34   for(const w of words)\{ const test=line?line+' '+w:w; if(x.measureText(test).width>maxW && line)\{ lines.push(line); line=w; \} else line=test; \}
+\f1\fs24 \
+
+\f0\fs34   if(line) lines.push(line);
+\f1\fs24 \
+
+\f0\fs34   return lines.slice(0,5);
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+
+\f0\fs34 const speech=(()=>\{ const c=document.createElement('canvas'); c.width=512; c.height=288;
+\f1\fs24 \
+
+\f0\fs34   const tex=new THREE.CanvasTexture(c);
+\f1\fs24 \
+
+\f0\fs34   const s=new THREE.Sprite(new THREE.SpriteMaterial(\{ map:tex, transparent:true, depthTest:false, opacity:0 \}));
+\f1\fs24 \
+
+\f0\fs34   s.scale.set(6.6,3.7,1); s.position.set(0,4.6,0); s.userData=\{c,tex\}; aurora.add(s); return s; \})();
+\f1\fs24 \
+
+\f0\fs34 let speakUntil=0;
+\f1\fs24 \
+
+\f0\fs34 function showSpeech(text)\{
+\f1\fs24 \
+
+\f0\fs34   if(!text) return;
+\f1\fs24 \
+
+\f0\fs34   const \{c,tex\}=speech.userData; const x=c.getContext('2d');
+\f1\fs24 \
+
+\f0\fs34   x.clearRect(0,0,c.width,c.height);
+\f1\fs24 \
+
+\f0\fs34   x.fillStyle='rgba(8,16,26,.88)'; x.strokeStyle='rgba(47,227,255,.55)'; x.lineWidth=3;
+\f1\fs24 \
+
+\f0\fs34   roundRect(x,12,12,c.width-24,c.height-56,22); x.fill(); x.stroke();
+\f1\fs24 \
+
+\f0\fs34   x.beginPath(); x.moveTo(c.width/2-22,c.height-46); x.lineTo(c.width/2+22,c.height-46); x.lineTo(c.width/2,c.height-10); x.closePath(); x.fill();
+\f1\fs24 \
+
+\f0\fs34   x.fillStyle='#dff6ff'; x.font='30px "Sora", Arial'; x.textAlign='center'; x.textBaseline='top';
+\f1\fs24 \
+
+\f0\fs34   const lines=wrapLines(x,text,c.width-72); let y=Math.max(42,(c.height-56-lines.length*38)/2);
+\f1\fs24 \
+
+\f0\fs34   for(const ln of lines)\{ x.fillText(ln,c.width/2,y); y+=38; \}
+\f1\fs24 \
+
+\f0\fs34   tex.needsUpdate=true; speech.material.opacity=1;
+\f1\fs24 \
+
+\f0\fs34   speakUntil=performance.now()+Math.min(9000,2600+text.length*55);
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 function hexInt(h)\{ return parseInt(h.replace('#',''),16); \}
+\f1\fs24 \
+
+\f0\fs34 function buildAvatar(name,color,me)\{
+\f1\fs24 \
+
+\f0\fs34   const g=new THREE.Group(); const col=hexInt(color);
+\f1\fs24 \
+
+\f0\fs34   const suit=new THREE.MeshStandardMaterial(\{ color:col, emissive:col, emissiveIntensity:me?.45:.28, roughness:.34, metalness:.62 \});
+\f1\fs24 \
+
+\f0\fs34   const torso=new THREE.Mesh(new THREE.CapsuleGeometry(.3,.52,6,14), suit); torso.position.y=.8; g.add(torso);
+\f1\fs24 \
+
+\f0\fs34   const head=new THREE.Mesh(new THREE.SphereGeometry(.25,18,18),
+\f1\fs24 \
+
+\f0\fs34     new THREE.MeshStandardMaterial(\{ color:0xeaf2ff, emissive:col, emissiveIntensity:.16, roughness:.4, metalness:.3 \}));
+\f1\fs24 \
+
+\f0\fs34   head.position.y=1.44; g.add(head);
+\f1\fs24 \
+
+\f0\fs34   const visor=new THREE.Mesh(new THREE.BoxGeometry(.3,.09,.06),
+\f1\fs24 \
+
+\f0\fs34     new THREE.MeshBasicMaterial(\{ color:col \})); visor.position.set(0,1.46,.2); g.add(visor);
+\f1\fs24 \
+
+\f0\fs34   // ground glow disc
+\f1\fs24 \
+
+\f0\fs34   const disc=new THREE.Mesh(new THREE.CircleGeometry(.55,24),
+\f1\fs24 \
+
+\f0\fs34     new THREE.MeshBasicMaterial(\{ color:col, transparent:true, opacity:me?.32:.2 \}));
+\f1\fs24 \
+
+\f0\fs34   disc.rotation.x=-Math.PI/2; disc.position.y=.02; g.add(disc);
+\f1\fs24 \
+
+\f0\fs34   g.add(new THREE.Mesh(new THREE.SphereGeometry(.58,14,14),
+\f1\fs24 \
+
+\f0\fs34     new THREE.MeshBasicMaterial(\{ color:col, transparent:true, opacity:me?.1:.05, side:THREE.BackSide \})));
+\f1\fs24 \
+
+\f0\fs34   g.add(new THREE.PointLight(col, me?2:1.2, 5));
+\f1\fs24 \
+
+\f0\fs34   const lbl=sprite(me?name+' \'b7you':name, color); lbl.position.set(0,2.05,0); lbl.scale.set(2.6,.66,1); g.add(lbl);
+\f1\fs24 \
+
+\f0\fs34   return g;
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 /* world state */
+\f1\fs24 \
+
+\f0\fs34 let me=null, myPos=\{x:0,z:0\}, myTargetRot=0;
+\f1\fs24 \
+
+\f0\fs34 const remotes=new Map();
+\f1\fs24 \
+
+\f0\fs34 const keys=new Set();
+\f1\fs24 \
+
+\f0\fs34 const SPEED=.085, BOUND=20;
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 window.addEventListener('keydown',e=>\{
+\f1\fs24 \
+
+\f0\fs34   if(document.activeElement && ['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
+\f1\fs24 \
+
+\f0\fs34   if(['KeyW','KeyA','KeyS','KeyD','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code))\{ keys.add(e.code); e.preventDefault(); \}
+\f1\fs24 \
+
+\f0\fs34 \});
+\f1\fs24 \
+
+\f0\fs34 window.addEventListener('keyup',e=>keys.delete(e.code));
+\f1\fs24 \
+
+\f0\fs34 stage.addEventListener('mouseleave',()=>keys.clear());
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 let lastMove=0;
+\f1\fs24 \
+
+\f0\fs34 function stepMovement()\{
+\f1\fs24 \
+
+\f0\fs34   if(!me) return;
+\f1\fs24 \
+
+\f0\fs34   let dx=0,dz=0;
+\f1\fs24 \
+
+\f0\fs34   if(keys.has('KeyW')||keys.has('ArrowUp'))    dz-=SPEED;
+\f1\fs24 \
+
+\f0\fs34   if(keys.has('KeyS')||keys.has('ArrowDown'))  dz+=SPEED;
+\f1\fs24 \
+
+\f0\fs34   if(keys.has('KeyA')||keys.has('ArrowLeft'))  dx-=SPEED;
+\f1\fs24 \
+
+\f0\fs34   if(keys.has('KeyD')||keys.has('ArrowRight')) dx+=SPEED;
+\f1\fs24 \
+
+\f0\fs34   if(!dx&&!dz) return;
+\f1\fs24 \
+
+\f0\fs34   if(dx&&dz)\{ dx*=.7071; dz*=.7071; \}
+\f1\fs24 \
+
+\f0\fs34   myPos.x=clamp(myPos.x+dx,-BOUND,BOUND); myPos.z=clamp(myPos.z+dz,-BOUND,BOUND);
+\f1\fs24 \
+
+\f0\fs34   me.position.set(myPos.x,0,myPos.z); myTargetRot=Math.atan2(dx,dz);
+\f1\fs24 \
+
+\f0\fs34   const now=performance.now();
+\f1\fs24 \
+
+\f0\fs34   if(now-lastMove>150)\{ lastMove=now;
+\f1\fs24 \
+
+\f0\fs34     fetch('/api/move',\{method:'POST',headers:\{'Content-Type':'application/json'\},
+\f1\fs24 \
+
+\f0\fs34       body:JSON.stringify(\{id:myId,x:myPos.x,y:0.5,z:myPos.z\})\}).catch(()=>\{\});
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 /* radar */
+\f1\fs24 \
+
+\f0\fs34 const radar=$('#radar');
+\f1\fs24 \
+
+\f0\fs34 function drawRadar(players)\{
+\f1\fs24 \
+
+\f0\fs34   radar.querySelectorAll('.blip').forEach(b=>b.remove());
+\f1\fs24 \
+
+\f0\fs34   for(const p of players)\{
+\f1\fs24 \
+
+\f0\fs34     const b=document.createElement('div'); b.className='blip';
+\f1\fs24 \
+
+\f0\fs34     const isMe={\field{\*\fldinst{HYPERLINK "http://p.id"}}{\fldrslt p.id}}===myId;
+\f1\fs24 \
+
+\f0\fs34     b.style.color=isMe?'#fff':(p.color||'#2fe3ff');
+\f1\fs24 \
+
+\f0\fs34     b.style.left=(50+clamp(p.x/BOUND,-1,1)*44)+'%';
+\f1\fs24 \
+
+\f0\fs34     b.style.top =(50+clamp(p.z/BOUND,-1,1)*44)+'%';
+\f1\fs24 \
+
+\f0\fs34     if(isMe) b.style.boxShadow='0 0 10px #fff';
+\f1\fs24 \
+
+\f0\fs34     radar.appendChild(b);
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 /* \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  presence + chat feeds \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  */
+\f1\fs24 \
+
+\f0\fs34 const worldChat=$('#world-chat');
+\f1\fs24 \
+
+\f0\fs34 const chatStream=$('#chat-stream');
+\f1\fs24 \
+
+\f0\fs34 const seenPlayers=new Set([myId]);
+\f1\fs24 \
+
+\f0\fs34 const FILLER=[
+\f1\fs24 \
+
+\f0\fs34   ['CyberNova','anyone heading to Sector 9?'],
+\f1\fs24 \
+
+\f0\fs34   ['Lunaf','the plaza looks unreal at night'],
+\f1\fs24 \
+
+\f0\fs34   ['ShadowBlade','gg on that last coin rush'],
+\f1\fs24 \
+
+\f0\fs34   ['k0bold','trading a Voidwalker skin, dm me'],
+\f1\fs24 \
+
+\f0\fs34 ];
+\f1\fs24 \
+
+\f0\fs34 function pushWorldChat(who,msg,sys)\{
+\f1\fs24 \
+
+\f0\fs34   const d=document.createElement('div'); d.className='wc-line'+(sys?' sys':'');
+\f1\fs24 \
+
+\f0\fs34   d.innerHTML=`<span class="who" style="color:$\{sys?'':myColorFor(who)\}">$\{esc(who)\}</span> <span class="msg">$\{esc(msg)\}</span>`;
+\f1\fs24 \
+
+\f0\fs34   worldChat.appendChild(d);
+\f1\fs24 \
+
+\f0\fs34   while(worldChat.children.length>5) worldChat.removeChild(worldChat.firstChild);
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+
+\f0\fs34 const colorMemo=\{\};
+\f1\fs24 \
+
+\f0\fs34 function myColorFor(name)\{ return colorMemo[name] || (colorMemo[name]=pickColor(name)); \}
+\f1\fs24 \
+
+\f0\fs34 function pushSocial(who,msg)\{
+\f1\fs24 \
+
+\f0\fs34   const d=document.createElement('div'); d.className='cmsg';
+\f1\fs24 \
+
+\f0\fs34   const col=myColorFor(who);
+\f1\fs24 \
+
+\f0\fs34   d.innerHTML=`<div class="pfp" style="background:$\{col\}">$\{esc(initials(who))\}</div>
+\f1\fs24 \
+
+\f0\fs34     <div class="body"><div class="nm" style="color:$\{col\}">$\{esc(who)\}</div><div class="tx">$\{esc(msg)\}</div></div>`;
+\f1\fs24 \
+
+\f0\fs34   chatStream.appendChild(d);
+\f1\fs24 \
+
+\f0\fs34   while(chatStream.children.length>14) chatStream.removeChild(chatStream.firstChild);
+\f1\fs24 \
+
+\f0\fs34   chatStream.scrollTop=chatStream.scrollHeight;
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 function syncWorld(data)\{
+\f1\fs24 \
+
+\f0\fs34   if(!data?.players) return;
+\f1\fs24 \
+
+\f0\fs34   const ids=new Set(data.players.map(p=>{\field{\*\fldinst{HYPERLINK "http://p.id"}}{\fldrslt p.id}}));
+\f1\fs24 \
+
+\f0\fs34   for(const [id,info] of remotes)\{ if(!ids.has(id))\{ scene.remove(info.mesh); remotes.delete(id);\} \}
+\f1\fs24 \
+
+\f0\fs34   for(const p of data.players)\{
+\f1\fs24 \
+
+\f0\fs34     if({\field{\*\fldinst{HYPERLINK "http://p.id"}}{\fldrslt p.id}}===myId) continue;
+\f1\fs24 \
+
+\f0\fs34     if(remotes.has({\field{\*\fldinst{HYPERLINK "http://p.id"}}{\fldrslt p.id}}))\{ const r=remotes.get({\field{\*\fldinst{HYPERLINK "http://p.id"}}{\fldrslt p.id}}); r.tx=p.x; r.tz=p.z; \}
+\f1\fs24 \
+
+\f0\fs34     else\{
+\f1\fs24 \
+
+\f0\fs34       const mesh=buildAvatar(p.name,p.color||'#2fe3ff',false);
+\f1\fs24 \
+
+\f0\fs34       mesh.position.set(p.x,0,p.z); scene.add(mesh);
+\f1\fs24 \
+
+\f0\fs34       remotes.set({\field{\*\fldinst{HYPERLINK "http://p.id"}}{\fldrslt p.id}},\{mesh,tx:p.x,tz:p.z\});
+\f1\fs24 \
+
+\f0\fs34       if(!seenPlayers.has({\field{\*\fldinst{HYPERLINK "http://p.id"}}{\fldrslt p.id}}))\{ seenPlayers.add({\field{\*\fldinst{HYPERLINK "http://p.id"}}{\fldrslt p.id}});
+\f1\fs24 \
+
+\f0\fs34         pushWorldChat(p.name,'entered the plaza',true);
+\f1\fs24 \
+
+\f0\fs34         pushSocial(p.name,'just joined the world'); \}
+\f1\fs24 \
+
+\f0\fs34     \}
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   $('#online-num').textContent=data.players.length||1;
+\f1\fs24 \
+
+\f0\fs34   $('#social-count').textContent=(data.players.length||1)+' here';
+\f1\fs24 \
+
+\f0\fs34   drawRadar(data.players);
+\f1\fs24 \
+
+\f0\fs34   if({\field{\*\fldinst{HYPERLINK "http://data.ai"}}{\fldrslt data.ai}}?.message && data.ai.message!==lastAiMsg && !auroraBusy)\{
+\f1\fs24 \
+
+\f0\fs34     lastAiMsg=data.ai.message; addBubble('ai',data.ai.message); showSpeech(data.ai.message);
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 /* \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  Aurora chat \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  */
+\f1\fs24 \
+
+\f0\fs34 const feed=$('#npc-feed'), field=$('#npc-field'), send=$('#npc-send');
+\f1\fs24 \
+
+\f0\fs34 let auroraBusy=false, lastAiMsg='';
+\f1\fs24 \
+
+\f0\fs34 function addBubble(kind,text)\{
+\f1\fs24 \
+
+\f0\fs34   const b=document.createElement('div'); b.className='bubble '+kind; b.textContent=text;
+\f1\fs24 \
+
+\f0\fs34   feed.appendChild(b); feed.scrollTop=feed.scrollHeight;
+\f1\fs24 \
+
+\f0\fs34   while(feed.children.length>20) feed.removeChild(feed.firstChild);
+\f1\fs24 \
+
+\f0\fs34   return b;
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+
+\f0\fs34 function setTyping(on)\{
+\f1\fs24 \
+
+\f0\fs34   let t=feed.querySelector('.typing');
+\f1\fs24 \
+
+\f0\fs34   if(on && !t)\{ t=document.createElement('div'); t.className='bubble ai typing';
+\f1\fs24 \
+
+\f0\fs34     t.innerHTML='Aurora is thinking<i></i><i></i><i></i>'; feed.appendChild(t); feed.scrollTop=feed.scrollHeight; \}
+\f1\fs24 \
+
+\f0\fs34   else if(!on && t)\{ t.remove(); \}
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+
+\f0\fs34 async function askAurora(text)\{
+\f1\fs24 \
+
+\f0\fs34   if(!text || auroraBusy) return;
+\f1\fs24 \
+
+\f0\fs34   auroraBusy=true; addBubble('me',text); setTyping(true);
+\f1\fs24 \
+
+\f0\fs34   send.disabled=true; field.disabled=true;
+\f1\fs24 \
+
+\f0\fs34   document.querySelectorAll('#quick button').forEach(b=>b.disabled=true);
+\f1\fs24 \
+
+\f0\fs34   try\{
+\f1\fs24 \
+
+\f0\fs34     const r=await fetch('/api/talk',\{method:'POST',headers:\{'Content-Type':'application/json'\},
+\f1\fs24 \
+
+\f0\fs34       body:JSON.stringify(\{message:text,playerName:myName\})\});
+\f1\fs24 \
+
+\f0\fs34     const data=await r.json(); setTyping(false);
+\f1\fs24 \
+
+\f0\fs34     if(data.message)\{ lastAiMsg=data.message; addBubble('ai',data.message);
+\f1\fs24 \
+
+\f0\fs34       pushWorldChat('Aurora',data.message,true); showSpeech(data.message); applyEmotion(data.emotion); \}
+\f1\fs24 \
+
+\f0\fs34     else addBubble('ai','\'85the signal flickered. Try again?');
+\f1\fs24 \
+
+\f0\fs34   \}catch\{ setTyping(false); addBubble('ai','Connection lost \'97 try once more, traveler.'); \}
+\f1\fs24 \
+
+\f0\fs34   finally\{ auroraBusy=false; send.disabled=false; field.disabled=false;
+\f1\fs24 \
+
+\f0\fs34     document.querySelectorAll('#quick button').forEach(b=>b.disabled=false); field.focus(); \}
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+
+\f0\fs34 function applyEmotion(e)\{
+\f1\fs24 \
+
+\f0\fs34   const map=\{ happy:0x34e6a8, curious:0x8a6bff, sad:0x4fd0ff, neutral:0x2fe3ff \};
+\f1\fs24 \
+
+\f0\fs34   const c=map[e]??0x2fe3ff; aCore.material.color.setHex(c); aCore.material.emissive.setHex(c); aCore.material.emissiveIntensity=.55;
+\f1\fs24 \
+
+\f0\fs34   // expression: mouth curvature + brow tilt
+\f1\fs24 \
+
+\f0\fs34   if(e==='sad')\{ mouth.rotation.z=0; browL.rotation.z=-.32; browR.rotation.z=.32; \}
+\f1\fs24 \
+
+\f0\fs34   else if(e==='curious')\{ mouth.rotation.z=Math.PI; browL.rotation.z=.28; browR.rotation.z=.08; \}
+\f1\fs24 \
+
+\f0\fs34   else \{ mouth.rotation.z=Math.PI; browL.rotation.z=0; browR.rotation.z=0; \}
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+
+\f0\fs34 send.addEventListener('click',()=>\{ const v=field.value.trim(); if(v)\{ field.value=''; askAurora(v);\} \});
+\f1\fs24 \
+
+\f0\fs34 field.addEventListener('keydown',e=>\{ if(e.key==='Enter')\{ const v=field.value.trim(); if(v)\{ field.value=''; askAurora(v);\} \} \});
+\f1\fs24 \
+
+\f0\fs34 document.querySelectorAll('#quick button').forEach(b=>b.addEventListener('click',()=>askAurora(b.dataset.q)));
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 /* \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  identity UI \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  */
+\f1\fs24 \
+
+\f0\fs34 function paintIdentity()\{
+\f1\fs24 \
+
+\f0\fs34   $('#you-name').textContent=myName;
+\f1\fs24 \
+
+\f0\fs34   $('#you-swatch').style.background=myColor;
+\f1\fs24 \
+
+\f0\fs34   $('#you-swatch').style.color=myColor;
+\f1\fs24 \
+
+\f0\fs34   $('#avatar-btn').textContent=initials(myName);
+\f1\fs24 \
+
+\f0\fs34   $('#me-row').textContent=myName;
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+
+\f0\fs34 function renameFlow()\{
+\f1\fs24 \
+
+\f0\fs34   const next=prompt('Choose your traveler handle:', myName);
+\f1\fs24 \
+
+\f0\fs34   if(!next) return;
+\f1\fs24 \
+
+\f0\fs34   const clean=next.trim().slice(0,20); if(!clean) return;
+\f1\fs24 \
+
+\f0\fs34   myName=clean; localStorage.setItem('ev_name',myName); paintIdentity();
+\f1\fs24 \
+
+\f0\fs34   fetch('/api/join',\{method:'POST',headers:\{'Content-Type':'application/json'\},
+\f1\fs24 \
+
+\f0\fs34     body:JSON.stringify(\{id:myId,name:myName,color:myColor\})\}).catch(()=>\{\});
+\f1\fs24 \
+
+\f0\fs34   if(me)\{ const old=me; scene.remove(old); me=buildAvatar(myName,myColor,true); me.position.set(myPos.x,0,myPos.z); scene.add(me); \}
+\f1\fs24 \
+
+\f0\fs34   toast('You are now '+myName);
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+
+\f0\fs34 $('#you-tag').addEventListener('click',renameFlow);
+\f1\fs24 \
+
+\f0\fs34 $('#avatar-btn').addEventListener('click',renameFlow);
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 /* \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  join + loops \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  */
+\f1\fs24 \
+
+\f0\fs34 async function join()\{
+\f1\fs24 \
+
+\f0\fs34   paintIdentity();
+\f1\fs24 \
+
+\f0\fs34   try\{
+\f1\fs24 \
+
+\f0\fs34     const p=await fetch('/api/join',\{method:'POST',headers:\{'Content-Type':'application/json'\},
+\f1\fs24 \
+
+\f0\fs34       body:JSON.stringify(\{id:myId,name:myName,color:myColor\})\}).then(r=>r.json());
+\f1\fs24 \
+
+\f0\fs34     myPos=\{x:p.x??0,z:p.z??0\};
+\f1\fs24 \
+
+\f0\fs34   \}catch\{ myPos=\{x:0,z:0\}; \}
+\f1\fs24 \
+
+\f0\fs34   me=buildAvatar(myName,myColor,true); me.position.set(myPos.x,0,myPos.z); scene.add(me);
+\f1\fs24 \
+
+\f0\fs34   pushWorldChat('Aurora',`Welcome, $\{myName\}. Use WASD to wander \'97 ask me anything.`,true);
+\f1\fs24 \
+
+\f0\fs34   addBubble('ai',`Hi $\{myName\}! I'm Aurora. How can I help you today?`);
+\f1\fs24 \
+
+\f0\fs34   showSpeech(`Hi $\{myName\}! Ask me anything.`);
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   const tick=async()=>\{ const d=await fetch('/api/world').then(r=>r.json()).catch(()=>null); if(d) syncWorld(d); \};
+\f1\fs24 \
+
+\f0\fs34   await tick();
+\f1\fs24 \
+
+\f0\fs34   setInterval(tick,1500);
+\f1\fs24 \
+
+\f0\fs34   setInterval(()=>fetch('/api/heartbeat',\{method:'POST',headers:\{'Content-Type':'application/json'\},
+\f1\fs24 \
+
+\f0\fs34     body:JSON.stringify(\{id:myId\})\}).catch(()=>\{\}),5000);
+\f1\fs24 \
+
+\f0\fs34   window.addEventListener('beforeunload',()=>navigator.sendBeacon('/api/leave',JSON.stringify(\{id:myId\})));
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0   // seed social channel with a little life
+\f1\fs24 \
+
+\f0\fs34   FILLER.forEach((m,i)=>setTimeout(()=>pushSocial(m[0],m[1]), 600+i*1400));
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 /* \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  render loop \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  */
+\f1\fs24 \
+
+\f0\fs34 let prev=0;
+\f1\fs24 \
+
+\f0\fs34 function loop(t)\{
+\f1\fs24 \
+
+\f0\fs34   requestAnimationFrame(loop);
+\f1\fs24 \
+
+\f0\fs34   const dt=Math.min((t-prev)*.001,.05); prev=t; const s=t*.001;
+\f1\fs24 \
+
+\f0\fs34   aurora.position.y=1.9+Math.sin(s*1.2)*.14; aurora.rotation.y=Math.sin(s*.5)*.22;
+\f1\fs24 \
+
+\f0\fs34   aRings.forEach((r,i)=>\{ r.rotation.z=s*(.3+i*.12)*(i?-1:1); \});
+\f1\fs24 \
+
+\f0\fs34   // blink + talking mouth
+\f1\fs24 \
+
+\f0\fs34   const blink=(Math.sin(s*1.7)>.97)?.14:1; eyeL.scale.y=blink; eyeR.scale.y=blink;
+\f1\fs24 \
+
+\f0\fs34   const talking=performance.now()<speakUntil;
+\f1\fs24 \
+
+\f0\fs34   mouth.scale.y = talking ? 1+Math.abs(Math.sin(s*16))*1.7 : 1;
+\f1\fs24 \
+
+\f0\fs34   if(!talking && speech.material.opacity>0) speech.material.opacity=Math.max(0,speech.material.opacity-dt*.6);
+\f1\fs24 \
+
+\f0\fs34   stepMovement();
+\f1\fs24 \
+
+\f0\fs34   if(me)\{ me.rotation.y += (myTargetRot-me.rotation.y)*Math.min(1,dt*8);
+\f1\fs24 \
+
+\f0\fs34     const tx=myPos.x, tz=myPos.z;
+\f1\fs24 \
+
+\f0\fs34     cam.position.x += (tx-cam.position.x)*.06;
+\f1\fs24 \
+
+\f0\fs34     cam.position.y += (4.7-cam.position.y)*.06;
+\f1\fs24 \
+
+\f0\fs34     cam.position.z += (tz+11-cam.position.z)*.06;
+\f1\fs24 \
+
+\f0\fs34     cam.lookAt(tx,1.1,tz-6);
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   for(const [,r] of remotes)\{
+\f1\fs24 \
+
+\f0\fs34     r.mesh.position.x += (r.tx-r.mesh.position.x)*Math.min(1,dt*6);
+\f1\fs24 \
+
+\f0\fs34     r.mesh.position.z += (r.tz-r.mesh.position.z)*Math.min(1,dt*6);
+\f1\fs24 \
+
+\f0\fs34   \}
+\f1\fs24 \
+
+\f0\fs34   renderer.render(scene,cam);
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+
+\f0\fs34 resize(); loop(0); join();
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 /* \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  showcase panel interactions \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  */
+\f1\fs24 \
+
+\f0\fs34 // channels
+\f1\fs24 \
+
+\f0\fs34 document.querySelectorAll('#channels .ch').forEach(c=>c.addEventListener('click',()=>\{
+\f1\fs24 \
+
+\f0\fs34   document.querySelectorAll('#channels .ch').forEach(x=>x.classList.remove('on'));
+\f1\fs24 \
+
+\f0\fs34   c.classList.add('on'); toast('Switched to #'+{\field{\*\fldinst{HYPERLINK "http://c.dataset.ch"}}{\fldrslt c.dataset.ch}});
+\f1\fs24 \
+
+\f0\fs34 \}));
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 // watch together
+\f1\fs24 \
+
+\f0\fs34 let wtPlaying=true, wtPct=38;
+\f1\fs24 \
+
+\f0\fs34 const wtBar=$('#wt-bar'), wtCur=$('#wt-cur'), wtPlay=$('#wt-play');
+\f1\fs24 \
+
+\f0\fs34 function fmt(p)\{ const sec=Math.floor(p/100*2945); return String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0'); \}
+\f1\fs24 \
+
+\f0\fs34 setInterval(()=>\{ if(!wtPlaying) return; wtPct=(wtPct+0.15)%100; wtBar.style.width=wtPct+'%'; wtCur.textContent=fmt(wtPct); \},900);
+\f1\fs24 \
+
+\f0\fs34 wtPlay.addEventListener('click',()=>\{ wtPlaying=!wtPlaying; wtPlay.querySelector('use').setAttribute('href', wtPlaying?'#i-play':'#i-play'); toast(wtPlaying?'Resumed watch party':'Paused for everyone'); \});
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 // mini game \'97 Coin Rush burst
+\f1\fs24 \
+
+\f0\fs34 const gameBox=$('#game-box'), scoreEl=$('#game-score'), mePts=$('#me-pts');
+\f1\fs24 \
+
+\f0\fs34 function spawnCoin()\{
+\f1\fs24 \
+
+\f0\fs34   const c=document.createElement('div'); c.className='coin';
+\f1\fs24 \
+
+\f0\fs34   c.style.left=(10+Math.random()*80)+'%'; c.style.top='-10%';
+\f1\fs24 \
+
+\f0\fs34   c.style.transition='top 1.1s linear, opacity .3s'; gameBox.appendChild(c);
+\f1\fs24 \
+
+\f0\fs34   requestAnimationFrame(()=>\{ c.style.top='110%'; \});
+\f1\fs24 \
+
+\f0\fs34   setTimeout(()=>c.remove(),1200);
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+
+\f0\fs34 $('#play-game').addEventListener('click',()=>\{
+\f1\fs24 \
+
+\f0\fs34   let score=0; const start=performance.now();
+\f1\fs24 \
+
+\f0\fs34   const iv=setInterval(()=>\{ spawnCoin(); score+=Math.floor(40+Math.random()*120); scoreEl.textContent=score.toLocaleString();
+\f1\fs24 \
+
+\f0\fs34     if(performance.now()-start>4200)\{ clearInterval(iv);
+\f1\fs24 \
+
+\f0\fs34       mePts.textContent=Math.max(6330,score).toLocaleString();
+\f1\fs24 \
+
+\f0\fs34       toast('Coin Rush \'b7 you scored '+score.toLocaleString()+' ECHO points!');
+\f1\fs24 \
+
+\f0\fs34       addWalletTx('Coin Rush \'97 round reward', Math.round(score/50));
+\f1\fs24 \
+
+\f0\fs34     \}
+\f1\fs24 \
+
+\f0\fs34   \},420);
+\f1\fs24 \
+
+\f0\fs34 \});
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 // wallet
+\f1\fs24 \
+
+\f0\fs34 let balance=2458;
+\f1\fs24 \
+
+\f0\fs34 function bumpWallet()\{ balance += Math.round((Math.random()*2-0.6)); $('#wallet-amt').textContent=balance.toLocaleString(); \}
+\f1\fs24 \
+
+\f0\fs34 setInterval(bumpWallet,4000);
+\f1\fs24 \
+
+\f0\fs34 function addWalletTx(label,amt)\{
+\f1\fs24 \
+
+\f0\fs34   balance+=amt; $('#wallet-amt').textContent=balance.toLocaleString();
+\f1\fs24 \
+
+\f0\fs34   const tx=document.querySelector('.tx');
+\f1\fs24 \
+
+\f0\fs34   const row=document.createElement('div'); row.className='txrow';
+\f1\fs24 \
+
+\f0\fs34   row.innerHTML=`<div class="ti in"><svg class="ic"><use href="#i-down"/></svg></div>
+\f1\fs24 \
+
+\f0\fs34     <div class="td"><div class="t1">$\{esc(label)\}</div><div class="t2">just now</div></div>
+\f1\fs24 \
+
+\f0\fs34     <div class="tv in">+$\{amt.toFixed(2)\}</div>`;
+\f1\fs24 \
+
+\f0\fs34   tx.insertBefore(row,tx.firstChild);
+\f1\fs24 \
+
+\f0\fs34   while(tx.children.length>4) tx.removeChild(tx.lastChild);
+\f1\fs24 \
+
+\f0\fs34 \}
+\f1\fs24 \
+
+\f0\fs34 $('#w-send').addEventListener('click',()=>toast('Send ECHO \'97 wallet flow coming soon'));
+\f1\fs24 \
+
+\f0\fs34 $('#w-recv').addEventListener('click',()=>toast('Your receive address was copied'));
+\f1\fs24 \
+
+\f0\fs34 $('#w-hist').addEventListener('click',()=>toast('Opening full transaction history'));
+\f1\fs24 \
+
+\f0\fs34 $('#view-all').addEventListener('click',()=>toast('Opening full transaction history'));
+\f1\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl283\slmult1\pardirnatural\partightenfactor0
+
+\f0\fs34 \cf0 // snapshot
+\f1\fs24 \
+
+\f0\fs34 $('#snap-btn').addEventListener('click',()=>\{
+\f1\fs24 \
+
+\f0\fs34   try\{ const url=renderer.domElement.toDataURL('image/png'); const a=document.createElement('a');
+\f1\fs24 \
+
+\f0\fs34     a.href=url; a.download='echoverse-snapshot.png'; a.click(); toast('Snapshot saved'); \}
+\f1\fs24 \
+
+\f0\fs34   catch\{ toast('Snapshot blocked by browser'); \}
+\f1\fs24 \
+
+\f0\fs34 \});
+\f1\fs24 \
+
+\f0\fs34 </script>
+\f1\fs24 \
+
+\f0\fs34 </body>
+\f1\fs24 \
+
+\f0\fs34 </html>}
